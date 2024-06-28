@@ -8,6 +8,9 @@ const morgan = require("morgan");
 const app = express();
 require("dotenv").config();
 
+//* GLOBAL
+require("./globals/globals");
+
 app.use(morgan("dev"));
 app.enable();
 app.use(cors());

@@ -38,3 +38,5 @@ mongo
 redis/data/
 logs
 .env
+
+git.sh
