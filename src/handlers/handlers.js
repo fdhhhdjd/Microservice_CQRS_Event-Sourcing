@@ -12,12 +12,17 @@ const Payment = require("../models/PaymentModel");
 const Product = require("../models/productModel");
 
 const createOrder = async (orderData) => {
-  const orderId = uuidv4();
-  orderData.orderId = uuidv4();
+  const aggregateId = uuidv4();
 
-  const event = await saveEvent(orderId, ORDER_CREATED, orderData);
+  const eventData = {
+    orderId: uuidv4(),
+    amount: orderData.amount,
+    productId: orderData.productId,
+  };
 
-  await Order.create({ id: uuidv4(), ...orderData });
+  const event = await saveEvent(aggregateId, ORDER_CREATED, eventData);
+
+  await Order.create({ id: uuidv4(), ...eventData });
 
   await rabbitConnection.publish("OrderQueue", JSON.stringify(event));
   return event;
@@ -36,7 +41,7 @@ const reserveProduct = async (productId, productData) => {
     where: { id: productData.productId },
   });
   if (product) {
-    product.stock -= 1; // Decrease stock by 1
+    product.stock -= 1;
     await product.save();
     const event = await saveEvent(productId, PRODUCT_RESERVED, productData);
     await rabbitConnection.publish("ProductQueue", JSON.stringify(event));
