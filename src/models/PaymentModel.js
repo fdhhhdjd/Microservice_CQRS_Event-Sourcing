@@ -1,22 +1,40 @@
 const SequelizePGConnection = require("../dbs/init.sequelizePG");
 const { DataTypes } = require("sequelize");
 
-const Payment = SequelizePGConnection.sequelize.define("Payment", {
-  id: {
-    type: DataTypes.UUID,
-    primaryKey: true,
-    allowNull: false,
+const Payment = SequelizePGConnection.sequelize.define(
+  "Payment",
+  {
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    orderId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    amount: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: "PROCESSED",
+    },
   },
-  amount: {
-    type: DataTypes.FLOAT,
-    allowNull: false,
-  },
-  status: {
-    type: DataTypes.STRING,
-    defaultValue: "PROCESSED",
-  },
-});
+  {
+    tableName: "Payment",
+    timestamps: true,
+  }
+);
 
-SequelizePGConnection.sequelize.sync();
+(async () => {
+  try {
+    await SequelizePGConnection.sequelize.sync();
+  } catch (error) {
+    console.error("Unable to sync the database:", error);
+  }
+})();
 
 module.exports = Payment;

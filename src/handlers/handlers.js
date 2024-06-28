@@ -13,6 +13,8 @@ const Product = require("../models/productModel");
 
 const createOrder = async (orderData) => {
   const orderId = uuidv4();
+  orderData.orderId = uuidv4();
+
   const event = await saveEvent(orderId, ORDER_CREATED, orderData);
 
   await Order.create({ id: uuidv4(), ...orderData });
@@ -21,8 +23,7 @@ const createOrder = async (orderData) => {
   return event;
 };
 
-const processPayment = async (paymentData) => {
-  const paymentId = uuidv4();
+const processPayment = async (paymentId, paymentData) => {
   const event = await saveEvent(paymentId, PAYMENT_PROCESSED, paymentData);
   await Payment.create({ id: paymentId, ...paymentData });
 
@@ -31,7 +32,9 @@ const processPayment = async (paymentData) => {
 };
 
 const reserveProduct = async (productId, productData) => {
-  const product = await Product.findOne({ where: { id: productId } });
+  const product = await Product.findOne({
+    where: { id: productData.productId },
+  });
   if (product) {
     product.stock -= 1; // Decrease stock by 1
     await product.save();

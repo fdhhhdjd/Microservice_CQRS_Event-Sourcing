@@ -14,6 +14,7 @@ rabbitConnection.consume("OrderQueue", async (msgContent) => {
       await handlePayment(event.aggregateId, {
         amount: event.eventData.amount,
         orderId: event.eventData.orderId,
+        productId: event.eventData.productId,
       });
     }
   } catch (error) {

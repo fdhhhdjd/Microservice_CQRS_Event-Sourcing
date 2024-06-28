@@ -6,9 +6,8 @@ rabbitConnection.consume("PaymentQueue", async (msgContent) => {
   try {
     const event = JSON.parse(msgContent);
 
-    console.log(msgContent, "-----");
-
     if (event.eventType === PAYMENT_PROCESSED) {
+      console.log(event.eventData);
       await handleProductReservation(event.aggregateId, {
         productId: event.eventData.productId,
       });

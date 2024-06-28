@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const {
-  mongo: { user, password, host, port, source, link },
+  mongo: { user, password, host, port, source, database, link },
 } = require("../configs/mongo.configs");
 const { replaceTemplateStrings } = require("../helpers/stringHelpers");
 const { isNodeEnvMatch } = require("../helpers/appHelpers");
@@ -19,6 +19,7 @@ class MongoDBConnection {
       host,
       port,
       source,
+      database,
     });
 
     this.client = {};
@@ -47,10 +48,10 @@ class MongoDBConnection {
   }
 
   async initDatabase(retries = 10) {
-    if (isNodeEnvMatch(NODE_ENV)) {
-      mongoose.set("debug", true);
-      mongoose.set("debug", { color: true });
-    }
+    // if (isNodeEnvMatch(NODE_ENV)) {
+    //   mongoose.set("debug", true);
+    //   mongoose.set("debug", { color: true });
+    // }
 
     try {
       await mongoose.connect(this.URL_MONGO, {
