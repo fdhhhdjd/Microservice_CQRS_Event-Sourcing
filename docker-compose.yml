@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: "${MONGO_INITDB_DATABASE}"
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_INITDB_ROOT_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_INITDB_ROOT_PASSWORD}"
+    env_file:
+      - .env
+    volumes:
+      - ./mongo:/docker-entrypoint-initdb.d
+      - mongodb_data:/data/db
+    ports:
+      - "${MONGP_INITDB_PORT}:${MONGP_INITDB_PORT}"
+
+  postgres:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      PGDATA: "/data/postgres"
+    volumes:
+      - db_data/:/var/lib/postgresql/data/postgres
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+
+  rabbitmq:
+    image: rabbitmq:management
+    restart: unless-stopped
+    environment:
+      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST:-}
+    env_file:
+      - .env
+    ports:
+      - ${RABBIT_MQ_PORT}:${RABBIT_MQ_PORT}
+      - ${RABBIT_MQ_SERVER}:${RABBIT_MQ_SERVER}
+    labels:
+      NAME: "rabbitmq"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+volumes:
+  mongodb_data:
+  db_data:
+  rabbitmq-data:
