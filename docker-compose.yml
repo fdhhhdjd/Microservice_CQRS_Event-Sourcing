@@ -5,16 +5,16 @@ services:
     image: mongo:latest
     restart: always
     environment:
-      MONGO_INITDB_DATABASE: "${MONGO_INITDB_DATABASE}"
-      MONGO_INITDB_ROOT_USERNAME: "${MONGO_INITDB_ROOT_USERNAME}"
-      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_INITDB_ROOT_PASSWORD}"
+      MONGO_INITDB_DATABASE: "${MONGO_INIT_DB_SOURCE}"
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_INIT_DB_ROOT_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_INIT_DB_ROOT_PASSWORD}"
     env_file:
       - .env
     volumes:
       - ./mongo:/docker-entrypoint-initdb.d
       - mongodb_data:/data/db
     ports:
-      - "${MONGP_INITDB_PORT}:${MONGP_INITDB_PORT}"
+      - "${MONGO_INIT_DB_PORT}:${MONGO_INIT_DB_PORT}"
 
   postgres:
     image: postgres:latest
@@ -35,10 +35,10 @@ services:
     image: rabbitmq:management
     restart: unless-stopped
     environment:
-      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-}
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-}
-      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST:-}
+      RABBITMQ_ERLANG_COOKIE: ${RABBIT_MQ_ERLANG_COOKIE:-}
+      RABBITMQ_DEFAULT_USER: ${RABBIT_MQ_DEFAULT_USER:-}
+      RABBITMQ_DEFAULT_PASS: ${RABBIT_MQ_DEFAULT_PASS:-}
+      RABBITMQ_DEFAULT_VHOST: ${RABBIT_MQ_DEFAULT_VHOST:-}
     env_file:
       - .env
     ports:
