@@ -5,15 +5,6 @@ const {
   rabbit: { user, password, host, port, link },
 } = require("../configs/rabbit.configs");
 
-console.log(
-  replaceTemplateStrings(link, {
-    username: user,
-    password: encodeURIComponent(password),
-    host,
-    port,
-  })
-);
-
 class RabbitMQ {
   constructor() {
     this.connectionString = replaceTemplateStrings(link, {
@@ -44,6 +35,9 @@ class RabbitMQ {
   }
 
   async publish(queue, message) {
+    if (!this.connection || !this.channel) {
+      await this.connect();
+    }
     await this.channel.assertQueue(queue, { durable: true });
     return this.channel.sendToQueue(queue, Buffer.from(message), {
       persistent: true,
@@ -51,6 +45,9 @@ class RabbitMQ {
   }
 
   async consume(queue, callback) {
+    if (!this.connection || !this.channel) {
+      await this.connect();
+    }
     await this.channel.assertQueue(queue, { durable: true });
     this.channel.consume(queue, (msg) => {
       if (msg !== null) {

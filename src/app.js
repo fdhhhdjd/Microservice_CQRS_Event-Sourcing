@@ -5,11 +5,11 @@ const express = require("express");
 const { default: helmet } = require("helmet");
 const morgan = require("morgan");
 
+const orderCommand = require("./app/commands/orderCommand");
+const products = require("./app/controllers/productControllers");
+
 const app = express();
 require("dotenv").config();
-
-//* GLOBAL
-require("./globals/globals");
 
 app.use(morgan("dev"));
 app.enable();
@@ -23,5 +23,16 @@ app.use(
     extended: true,
   })
 );
+
+//* GLOBAL
+require("./globals/globals");
+
+//* ROUTES
+
+// Model: CURD
+app.use("/api", products);
+
+// Model: CQRS-ES
+app.use("/commands", orderCommand);
 
 module.exports = app;

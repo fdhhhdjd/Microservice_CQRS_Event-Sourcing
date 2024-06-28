@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { NODE_ENV } = require("../constants/appConstants");
 
 const DEV = {

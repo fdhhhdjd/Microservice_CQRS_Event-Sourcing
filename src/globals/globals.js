@@ -1,5 +1,5 @@
 const dbConnection = require("../dbs/init.mongo");
-const pgConnection = require("../dbs/init.pg");
+const SequelizePGConnection = require("../dbs/init.sequelizePG");
 const rabbitConnection = require("../dbs/init.rabbit");
 
 const connectInit = async () => {
@@ -7,10 +7,15 @@ const connectInit = async () => {
   await dbConnection.initDatabase();
 
   //* PostgreSQL
-  await pgConnection.initDatabase();
+  await SequelizePGConnection.initDatabase();
 
   //* RabbitMQ
   await rabbitConnection.connect();
+
+  require("../subscribers/orderSubscriber");
+  require("../subscribers/paymentSubscriber");
+  require("../subscribers/productSubscriber");
+  require("../subscribers/notificationSubscriber");
 };
 
 connectInit();
