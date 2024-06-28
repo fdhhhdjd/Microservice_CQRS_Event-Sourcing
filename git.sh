@@ -1,3 +1,3 @@
 git add .
-git commit -m "feat: update cqrs es "
+git commit -m "feat: add file readme.md"
 git push 
