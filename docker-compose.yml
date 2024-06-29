@@ -12,6 +12,7 @@ services:
       - .env
     volumes:
       - ./mongo:/docker-entrypoint-initdb.d
+      - ./mongo/conf:/etc/mongod.conf
       - mongodb_data:/data/db
     ports:
       - "${MONGO_INIT_DB_PORT}:${MONGO_INIT_DB_PORT}"
