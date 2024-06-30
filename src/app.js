@@ -5,7 +5,7 @@ const express = require("express");
 const { default: helmet } = require("helmet");
 const morgan = require("morgan");
 
-const orderCommand = require("./app/commands/orderCommand");
+const orderCommand = require("./app/controllers/orderCommand");
 const products = require("./app/controllers/productControllers");
 
 const app = express();

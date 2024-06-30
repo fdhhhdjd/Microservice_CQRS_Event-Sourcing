@@ -1,4 +1,4 @@
-const { processPayment } = require("../../handlers/handlers");
+const { processPayment } = require("../../commands/handlers/handlers");
 
 const handlePayment = async (paymentId, paymentData) => {
   return await processPayment(paymentId, paymentData);

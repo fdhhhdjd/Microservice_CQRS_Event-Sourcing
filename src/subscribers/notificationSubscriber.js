@@ -1,7 +1,6 @@
 const rabbitConnection = require("../dbs/init.rabbit");
-
 const { NOTIFICATION_SENT } = require("../events/eventTypes");
-const Notification = require("../models/notificationModel");
+const Notification = require("../commands/models/notificationModel");
 
 rabbitConnection.consume("NotificationQueue", async (msgContent) => {
   const event = JSON.parse(msgContent);

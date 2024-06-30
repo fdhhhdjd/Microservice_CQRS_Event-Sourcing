@@ -1,3 +1,3 @@
 git add .
-git commit -m "feat: add file config vps mongo"
+git commit -m "fix: fix structure folder cqrs-es"
 git push 

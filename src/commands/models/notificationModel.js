@@ -1,9 +1,9 @@
-const SequelizePGConnection = require("../dbs/init.sequelizePG");
+const SequelizePGConnection = require("../../dbs/init.sequelizePG");
 
 const { DataTypes } = require("sequelize");
 
-const Order = SequelizePGConnection.sequelize.define(
-  "Order",
+const Notification = SequelizePGConnection.sequelize.define(
+  "Notification",
   {
     id: {
       type: DataTypes.UUID,
@@ -11,30 +11,27 @@ const Order = SequelizePGConnection.sequelize.define(
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
-    productId: {
+    message: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    amount: {
-      type: DataTypes.FLOAT,
       allowNull: false,
     },
     status: {
       type: DataTypes.STRING,
-      defaultValue: "CREATED",
+      defaultValue: "SENT",
     },
   },
   {
-    tableName: "Order",
+    tableName: "Notification",
     timestamps: true,
   }
 );
 
 (async () => {
   try {
-    await SequelizePGConnection.sequelize.sync();
+    await SequelizePGConnection.sequelize.sync({ force: false });
   } catch (error) {
     console.error("Unable to sync the database:", error);
   }
 })();
-module.exports = Order;
+
+module.exports = Notification;

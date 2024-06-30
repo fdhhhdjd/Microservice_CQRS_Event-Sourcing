@@ -1,6 +1,7 @@
-const { reserveProduct } = require("../../handlers/handlers");
-const product = require("../../models/productModel");
 const { v4: uuidv4 } = require("uuid");
+
+const { reserveProduct } = require("../../commands/handlers/handlers");
+const product = require("../../commands/models/productModel");
 
 const handleProductReservation = async (productId, productData) => {
   return await reserveProduct(productId, productData);

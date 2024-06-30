@@ -1,12 +1,12 @@
 const { v4: uuidv4 } = require("uuid");
-const { saveEvent } = require("../events/eventStore");
+const { saveEvent } = require("../../events/eventStore");
 const {
   ORDER_CREATED,
   PAYMENT_PROCESSED,
   PRODUCT_RESERVED,
   NOTIFICATION_SENT,
-} = require("../events/eventTypes");
-const rabbitConnection = require("../dbs/init.rabbit");
+} = require("../../events/eventTypes");
+const rabbitConnection = require("../../dbs/init.rabbit");
 const Order = require("../models/orderModel");
 const Payment = require("../models/PaymentModel");
 const Product = require("../models/productModel");

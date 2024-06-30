@@ -11,6 +11,56 @@
 
 This project implements a Command Query Responsibility Segregation (CQRS) and Event Sourcing (ES) system, designed to handle complex business operations and ensure high performance and scalability. It uses a microservices architecture, leveraging various technologies such as MongoDB, PostgreSQL, RabbitMQ, and Docker for development and deployment.
 
+# Structure Folder
+
+```
+.
+├── .dockerignore
+├── .env
+├── .env.example
+├── .gitignore
+├── .vscode/
+│   └── settings.json
+├── docker/
+│   └── Dockerfile
+├── docker-compose.yml
+├── git.sh
+├── makefile
+├── mongo/
+│   ├── conf/
+│   │   └── mongod.conf
+│   └── init.sh
+├── package.json
+├── README.md
+├── server.js
+└── src/
+    ├── app.js
+    ├── commands/                # Thư mục mới cho các lệnh
+    │   ├── handlers/            # Xử lý logic cho các lệnh
+    │   └── models/              # Models đặc biệt cho phần commands
+    ├── configs/
+    │   ├── mongo.configs.js
+    │   ├── pg.configs.js
+    │   └── rabbit.configs.js
+    ├── constants/
+    │   ├── appConstants.js
+    │   └── timeConstants.js
+    ├── dbs/
+    │   ├── init.mongo.js
+    │   ├── init.rabbit.js
+    │   └── init.sequelizePG.js
+    ├── events/                  # Thư mục mới cho các sự kiện
+    │   ├── models/              # Models đặc biệt cho phần events
+    │   └── subscribers/         # Subscribers cho các sự kiện
+    ├── globals/
+    ├── helpers/
+    ├── models/                  # Cập nhật để phản ánh models chung
+    ├── queries/                 # Thư mục cho các truy vấn
+    │   ├── handlers/            # Xử lý logic cho các truy vấn
+    │   └── models/              # Models đặc biệt cho phần queries
+    └── subscribers/             # Cập nhật để xử lý các sự kiện từ commands/queries
+```
+
 ## Tài Khoản Donate li Cf để có động lực code cho anh em tham khảo 😄😄
 
 ![giphy](https://3.bp.blogspot.com/-SzGvXn2sTmw/V6k-90GH3ZI/AAAAAAAAIsk/Q678Pil-0kITLPa3fD--JkNdnJVKi_BygCLcB/s1600/cf10-fbc08%2B%25281%2529.gif)
