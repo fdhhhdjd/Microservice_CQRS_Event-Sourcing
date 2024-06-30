@@ -35,9 +35,9 @@ This project implements a Command Query Responsibility Segregation (CQRS) and Ev
 ├── server.js
 └── src/
     ├── app.js
-    ├── commands/                # Thư mục mới cho các lệnh
-    │   ├── handlers/            # Xử lý logic cho các lệnh
-    │   └── models/              # Models đặc biệt cho phần commands
+    ├── commands/
+    │   ├── handlers/
+    │   └── models/
     ├── configs/
     │   ├── mongo.configs.js
     │   ├── pg.configs.js
@@ -49,17 +49,57 @@ This project implements a Command Query Responsibility Segregation (CQRS) and Ev
     │   ├── init.mongo.js
     │   ├── init.rabbit.js
     │   └── init.sequelizePG.js
-    ├── events/                  # Thư mục mới cho các sự kiện
-    │   ├── models/              # Models đặc biệt cho phần events
-    │   └── subscribers/         # Subscribers cho các sự kiện
+    ├── events/
+    │   ├── models/
+    │   └── subscribers/
     ├── globals/
     ├── helpers/
-    ├── models/                  # Cập nhật để phản ánh models chung
-    ├── queries/                 # Thư mục cho các truy vấn
-    │   ├── handlers/            # Xử lý logic cho các truy vấn
-    │   └── models/              # Models đặc biệt cho phần queries
-    └── subscribers/             # Cập nhật để xử lý các sự kiện từ commands/queries
+    ├── models/
+    ├── queries/
+    │   ├── handlers/
+    │   └── models/
+    └── subscribers/
 ```
+
+This README.md file outlines the directory structure of a software project that follows the Command Query Responsibility Segregation (CQRS) and Event Sourcing (ES) patterns. Here's a breakdown of the structure and the purpose of each directory:
+
+- `.`: The root directory of the project, containing configuration files and directories for the project setup.
+  - `.dockerignore`: Specifies files and directories to ignore when building Docker images.
+  - `.env` and `.env.example`: Environment configuration files, with `.env.example` serving as a template.
+  - `.gitignore`: Lists files and directories that Git should ignore.
+  - `.vscode/`: Contains Visual Studio Code specific settings.
+    - `settings.json`: VS Code configuration settings.
+  - `docker/`: Contains Docker-related files.
+    - `Dockerfile`: Instructions for building the Docker image.
+  - `docker-compose.yml`: Defines and runs multi-container Docker applications.
+  - `git.sh`: A shell script related to Git operations, possibly for automation.
+  - `makefile`: Defines set of tasks to be executed.
+  - `mongo/`: MongoDB specific configuration and initialization scripts.
+    - `conf/`: Contains MongoDB configuration files.
+    - `init.sh`: Script for initializing MongoDB.
+  - `package.json`: Defines npm package dependencies and scripts.
+  - `README.md`: This file, describing the project and its structure.
+  - `server.js`: The main entry point for the Node.js application.
+  - `src/`: Source code of the application, organized into specific directories for CQRS and ES.
+    - `app.js`: Main application script.
+    - `commands/`: Contains command handlers and models, dealing with write operations.
+      - `handlers/`: Logic for handling commands.
+      - `models/`: Special models for the command side of CQRS.
+    - `configs/`: Configuration files for databases and other services.
+    - `constants/`: Constants used throughout the application.
+    - `dbs/`: Database initialization scripts.
+    - `events/`: Contains event models and subscribers, central to Event Sourcing.
+      - `models/`: Models representing events in the system.
+      - `subscribers/`: Handlers that react to events.
+    - `globals/`: Global variables or configurations.
+    - `helpers/`: Utility functions and helpers.
+    - `models/`: General models for the application, reflecting the current state after events are applied.
+    - `queries/`: Contains query handlers and models, dealing with read operations.
+      - `handlers/`: Logic for handling queries.
+      - `models/`: Special models for the query side of CQRS.
+    - `subscribers/`: Updated to handle events from commands/queries, facilitating the reactive nature of the system.
+
+This structure supports the separation of concerns as advocated by CQRS and leverages Event Sourcing for maintaining the state of the application through events.
 
 ## Tài Khoản Donate li Cf để có động lực code cho anh em tham khảo 😄😄
 
