@@ -1,6 +1,6 @@
 'use strict';
 
-const { Created } = require('@/cors/success.response');
+const { Created } = require('@/cors');
 const ProductServices = require('@/app/v1/services/productService');
 
 class ProductControllers {
