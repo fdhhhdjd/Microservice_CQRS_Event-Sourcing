@@ -1,9 +1,9 @@
-const amqp = require("amqplib");
+const amqp = require('amqplib');
 
-const { replaceTemplateStrings } = require("../helpers/stringHelpers");
+const { replaceTemplateStrings } = require('../helpers/stringHelpers');
 const {
-  rabbit: { user, password, host, port, link },
-} = require("../configs/rabbit.configs");
+  rabbit: { user, password, host, port, link }
+} = require('../configs/rabbit.configs');
 
 class RabbitMQ {
   constructor() {
@@ -11,7 +11,7 @@ class RabbitMQ {
       username: user,
       password: encodeURIComponent(password),
       host,
-      port,
+      port
     });
     this.connection = null;
     this.channel = null;
@@ -21,15 +21,15 @@ class RabbitMQ {
     try {
       this.connection = await amqp.connect(this.connectionString);
       this.channel = await this.connection.createChannel();
-      console.log("CONNECTED TO RABBIT MQ SUCCESS 🐰!");
+      console.log('CONNECTED TO RABBIT MQ SUCCESS 🐰!');
     } catch (error) {
-      console.error("Connection to RabbitMQ failed", error.message);
+      console.error('Connection to RabbitMQ failed', error.message);
       if (retries > 0) {
         console.log(`Retrying to connect... (${retries} retries left)`);
-        await new Promise((resolve) => setTimeout(resolve, timeout));
+        await new Promise(resolve => setTimeout(resolve, timeout));
         return this.connect(retries - 1, timeout);
       } else {
-        throw new Error("Max retries reached. Failed to connect to RabbitMQ.");
+        throw new Error('Max retries reached. Failed to connect to RabbitMQ.');
       }
     }
   }
@@ -40,7 +40,7 @@ class RabbitMQ {
     }
     await this.channel.assertQueue(queue, { durable: true });
     return this.channel.sendToQueue(queue, Buffer.from(message), {
-      persistent: true,
+      persistent: true
     });
   }
 
@@ -49,7 +49,7 @@ class RabbitMQ {
       await this.connect();
     }
     await this.channel.assertQueue(queue, { durable: true });
-    this.channel.consume(queue, (msg) => {
+    this.channel.consume(queue, msg => {
       if (msg !== null) {
         callback(msg.content.toString());
         this.channel.ack(msg);

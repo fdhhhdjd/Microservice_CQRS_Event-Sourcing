@@ -5,6 +5,6 @@
  * @returns {string} - The modified template string with replaced values.
  */
 const replaceTemplateStrings = (template, data) =>
-  template.replace(/\$\{(.*?)\}/g, (_, key) => String(data[key] || ""));
+  template.replace(/\$\{(.*?)\}/g, (_, key) => String(data[key] || ''));
 
 module.exports = { replaceTemplateStrings };

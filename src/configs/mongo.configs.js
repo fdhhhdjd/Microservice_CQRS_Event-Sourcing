@@ -1,4 +1,4 @@
-const { NODE_ENV } = require("../constants/appConstants");
+const { NODE_ENV } = require('../constants/appConstants');
 
 const DEV = {
   mongo: {
@@ -8,8 +8,9 @@ const DEV = {
     password: process.env.MONGO_INIT_DB_ROOT_PASSWORD,
     database: process.env.MONGO_INIT_DB_DATABASE,
     source: process.env.MONGO_INIT_DB_SOURCE,
-    link: "mongodb://${username}:${password}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${source}",
-  },
+    link:
+      'mongodb://${username}:${password}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${source}'
+  }
 };
 
 const PRO = {
@@ -19,16 +20,17 @@ const PRO = {
     user: process.env.MONGO_INIT_DB_ROOT_USERNAME,
     password: process.env.MONGO_INIT_DB_ROOT_PASSWORD,
     source: process.env.MONGO_INIT_DB_SOURCE,
-    link: "mongodb://${username}:${password}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${source}",
-  },
+    link:
+      'mongodb://${username}:${password}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${source}'
+  }
 };
 
 const configs = {
   DEV,
-  PRO,
+  PRO
 };
 
-const getConfigs = (env) => {
+const getConfigs = env => {
   if (env === process.env.NODE_ENV) return configs.DEV;
   if (env === process.env.NODE_ENV) return configs.PRO;
   return null;

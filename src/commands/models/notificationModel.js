@@ -1,28 +1,28 @@
-const SequelizePGConnection = require("../../dbs/init.sequelizePG");
+const SequelizePGConnection = require('../../dbs/init.sequelizePG');
 
-const { DataTypes } = require("sequelize");
+const { DataTypes } = require('sequelize');
 
 const Notification = SequelizePGConnection.sequelize.define(
-  "Notification",
+  'Notification',
   {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
       allowNull: false,
-      defaultValue: DataTypes.UUIDV4,
+      defaultValue: DataTypes.UUIDV4
     },
     message: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     status: {
       type: DataTypes.STRING,
-      defaultValue: "SENT",
-    },
+      defaultValue: 'SENT'
+    }
   },
   {
-    tableName: "Notification",
-    timestamps: true,
+    tableName: 'Notification',
+    timestamps: true
   }
 );
 
@@ -30,7 +30,7 @@ const Notification = SequelizePGConnection.sequelize.define(
   try {
     await SequelizePGConnection.sequelize.sync({ force: false });
   } catch (error) {
-    console.error("Unable to sync the database:", error);
+    console.error('Unable to sync the database:', error);
   }
 })();
 

@@ -1,4 +1,4 @@
 module.exports = {
-  appHelpers: require("./appHelpers"),
-  stringHelpers: require("./stringHelpers"),
+  appHelpers: require('./appHelpers'),
+  stringHelpers: require('./stringHelpers')
 };

@@ -1,10 +1,10 @@
-const rabbitConnection = require("../dbs/init.rabbit");
-const { handlePayment } = require("../app/services/paymentService");
-const { ORDER_CREATED } = require("../events/eventTypes");
+const rabbitConnection = require('../dbs/init.rabbit');
+const { handlePayment } = require('../app/services/paymentService');
+const { ORDER_CREATED } = require('../events/eventTypes');
 
-rabbitConnection.consume("OrderQueue", async (msgContent) => {
+rabbitConnection.consume('OrderQueue', async msgContent => {
   if (!msgContent) {
-    console.error("Message content is undefined or null");
+    console.error('Message content is undefined or null');
     return;
   }
   try {
@@ -14,10 +14,10 @@ rabbitConnection.consume("OrderQueue", async (msgContent) => {
       await handlePayment(event.aggregateId, {
         amount: event.eventData.amount,
         orderId: event.eventData.orderId,
-        productId: event.eventData.productId,
+        productId: event.eventData.productId
       });
     }
   } catch (error) {
-    console.error("Error parsing message content:", error);
+    console.error('Error parsing message content:', error);
   }
 });

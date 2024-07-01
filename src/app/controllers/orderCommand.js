@@ -1,8 +1,8 @@
-const express = require("express");
-const { createNewOrder } = require("../services/orderService");
+const express = require('express');
+const { createNewOrder } = require('../services/orderService');
 const router = express.Router();
 
-router.post("/orders", async (req, res) => {
+router.post('/orders', async (req, res) => {
   try {
     const orderData = req.body;
     const event = await createNewOrder(orderData);

@@ -4,8 +4,29 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "dev": "node --watch server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier --write src/**/*.{js,jsx}",
+    "prepare": "husky install",
+    "pre-commit": "echo \"[Husky] pre-commit\"",
+    "lint-staged": "lint-staged"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  },
+  "commitlint": {
+    "rules": {
+      "header-max-length": [
+        2,
+        "always",
+        130
+      ]
+    },
+    "extends": [
+      "./commitlint.config.js"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -25,6 +46,12 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "morgan": "^1.10.0"
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "morgan": "^1.10.0",
+    "prettier": "^1.19.1",
+    "prettierrc": "^0.0.0-5"
   }
 }
