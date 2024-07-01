@@ -1,3 +1,5 @@
+'use strict';
+
 const {
   appConstants: { NODE_ENV },
 } = require('@/constants');

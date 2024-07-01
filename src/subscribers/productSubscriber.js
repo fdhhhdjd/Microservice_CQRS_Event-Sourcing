@@ -1,5 +1,5 @@
 const { initRabbit } = require('@/dbs');
-const { handleNotification } = require('@/app/services/notificationService');
+const { handleNotification } = require('@/app/v1/services/notificationService');
 const { PRODUCT_RESERVED } = require('@/events/eventTypes');
 
 initRabbit.consume('ProductQueue', async msgContent => {

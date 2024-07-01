@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Replaces template strings in a given template with corresponding values from the data object.
  * @param {string} template - The template string containing placeholders.

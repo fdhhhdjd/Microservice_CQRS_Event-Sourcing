@@ -20,18 +20,24 @@ app.use(
   }),
 );
 
-const orderCommand = require('@/app/controllers/orderCommand');
-const products = require('@/app/controllers/productControllers');
+const { notFoundHandler, errorHandler } = require('./helpers/errorHandle');
 
 //* GLOBAL
 require('@/globals/globals');
 
-//* ROUTES
+//* GROUP VERSION ROUTES
+const apiRouter = express.Router();
+const v1Router = require('./app/v1/routes');
 
-// Model: CURD
-app.use('/api', products);
+apiRouter.use('/v1', v1Router);
 
-// Model: CQRS-ES
-app.use('/commands', orderCommand);
+app.use('/api', apiRouter);
+
+//* ERRORS
+// Handle 404 - Not Found
+app.use(notFoundHandler);
+
+// Handle 5xx errors
+app.use(errorHandler);
 
 module.exports = app;
