@@ -11,6 +11,11 @@
     "pre-commit": "echo \"[Husky] pre-commit\"",
     "lint-staged": "lint-staged"
   },
+  "lint-staged": {
+    "src/**/*.{js}": [
+      "npm run format"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint-staged"
