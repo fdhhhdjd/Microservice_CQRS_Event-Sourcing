@@ -51,10 +51,10 @@ class MongoDBConnection {
   }
 
   async initDatabase(retries = 10) {
-    if (isNodeEnvMatch(NODE_ENV)) {
-      mongoose.set('debug', true);
-      mongoose.set('debug', { color: true });
-    }
+    // if (isNodeEnvMatch(NODE_ENV)) {
+    //   mongoose.set('debug', true);
+    //   mongoose.set('debug', { color: true });
+    // }
 
     try {
       await mongoose.connect(this.URL_MONGO, {

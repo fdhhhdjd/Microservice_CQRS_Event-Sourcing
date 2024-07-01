@@ -1,6 +1,6 @@
 const { initSequelizePG, initMongo, initRabbit } = require('@/dbs');
 
-const connectInit = async () => {
+(async () => {
   //* MongoDB
   await initMongo.initDatabase();
 
@@ -14,6 +14,4 @@ const connectInit = async () => {
   require('@/subscribers/paymentSubscriber');
   require('@/subscribers/productSubscriber');
   require('@/subscribers/notificationSubscriber');
-};
-
-connectInit();
+})();

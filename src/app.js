@@ -5,12 +5,8 @@ const express = require('express');
 const { default: helmet } = require('helmet');
 const morgan = require('morgan');
 
-const orderCommand = require('@/app/controllers/orderCommand');
-const products = require('@/app/controllers/productControllers');
-
 const app = express();
 require('dotenv').config();
-
 app.use(morgan('dev'));
 app.enable();
 app.use(cors());
@@ -23,6 +19,9 @@ app.use(
     extended: true,
   }),
 );
+
+const orderCommand = require('@/app/controllers/orderCommand');
+const products = require('@/app/controllers/productControllers');
 
 //* GLOBAL
 require('@/globals/globals');
