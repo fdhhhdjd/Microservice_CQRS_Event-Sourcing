@@ -3,13 +3,13 @@ const {
   mongo: { user, password, host, port, source, database, link },
 } = require("../configs/mongo.configs");
 const { replaceTemplateStrings } = require("../helpers/stringHelpers");
-const { isNodeEnvMatch } = require("../helpers/appHelpers");
 const { NODE_ENV } = require("../constants/appConstants");
 const {
   _45_SECOND,
   _5_SECOND,
   _10_SECOND,
 } = require("../constants/timeConstants");
+const { appHelpers } = require("../helpers");
 
 class MongoDBConnection {
   constructor() {
@@ -48,10 +48,10 @@ class MongoDBConnection {
   }
 
   async initDatabase(retries = 10) {
-    // if (isNodeEnvMatch(NODE_ENV)) {
-    //   mongoose.set("debug", true);
-    //   mongoose.set("debug", { color: true });
-    // }
+    if (appHelpers.isNodeEnvMatch(NODE_ENV)) {
+      mongoose.set("debug", true);
+      mongoose.set("debug", { color: true });
+    }
 
     try {
       await mongoose.connect(this.URL_MONGO, {

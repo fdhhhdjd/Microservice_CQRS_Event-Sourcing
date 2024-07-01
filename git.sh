@@ -1,3 +1,3 @@
 git add .
-git commit -m "fix: fix structure folder cqrs-es"
+git commit -m "feat: add code exception"
 git push 
