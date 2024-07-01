@@ -1,4 +1,8 @@
-const { NODE_ENV } = require('../constants/appConstants');
+require('dotenv').config();
+
+const {
+  appConstants: { NODE_ENV },
+} = require('@/constants');
 
 const DEV = {
   pg: {
@@ -7,8 +11,8 @@ const DEV = {
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DB,
-    dialect: 'postgres'
-  }
+    dialect: 'postgres',
+  },
 };
 
 const PRO = {
@@ -18,13 +22,13 @@ const PRO = {
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DB,
-    dialect: 'postgres'
-  }
+    dialect: 'postgres',
+  },
 };
 
 const configs = {
   DEV,
-  PRO
+  PRO,
 };
 
 const getConfigs = env => {

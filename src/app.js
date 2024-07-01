@@ -5,8 +5,8 @@ const express = require('express');
 const { default: helmet } = require('helmet');
 const morgan = require('morgan');
 
-const orderCommand = require('./app/controllers/orderCommand');
-const products = require('./app/controllers/productControllers');
+const orderCommand = require('@/app/controllers/orderCommand');
+const products = require('@/app/controllers/productControllers');
 
 const app = express();
 require('dotenv').config();
@@ -20,12 +20,12 @@ app.use(compression());
 app.use(cookieParser());
 app.use(
   express.urlencoded({
-    extended: true
-  })
+    extended: true,
+  }),
 );
 
 //* GLOBAL
-require('./globals/globals');
+require('@/globals/globals');
 
 //* ROUTES
 

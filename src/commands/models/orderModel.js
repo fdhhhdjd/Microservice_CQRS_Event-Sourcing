@@ -1,6 +1,6 @@
-const SequelizePGConnection = require('../../dbs/init.sequelizePG');
-
 const { DataTypes } = require('sequelize');
+
+const SequelizePGConnection = require('@/dbs/init.sequelizePG');
 
 const Order = SequelizePGConnection.sequelize.define(
   'Order',
@@ -9,25 +9,25 @@ const Order = SequelizePGConnection.sequelize.define(
       type: DataTypes.UUID,
       primaryKey: true,
       allowNull: false,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     productId: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     amount: {
       type: DataTypes.FLOAT,
-      allowNull: false
+      allowNull: false,
     },
     status: {
       type: DataTypes.STRING,
-      defaultValue: 'CREATED'
-    }
+      defaultValue: 'CREATED',
+    },
   },
   {
     tableName: 'Order',
-    timestamps: true
-  }
+    timestamps: true,
+  },
 );
 
 (async () => {

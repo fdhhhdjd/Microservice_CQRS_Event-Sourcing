@@ -1,5 +1,7 @@
 const express = require('express');
-const { createNewOrder } = require('../services/orderService');
+
+const { createNewOrder } = require('@/app/services/orderService');
+
 const router = express.Router();
 
 router.post('/orders', async (req, res) => {

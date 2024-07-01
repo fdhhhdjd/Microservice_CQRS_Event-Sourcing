@@ -1,9 +1,13 @@
 const amqp = require('amqplib');
 
-const { replaceTemplateStrings } = require('../helpers/stringHelpers');
 const {
-  rabbit: { user, password, host, port, link }
-} = require('../configs/rabbit.configs');
+  stringHelpers: { replaceTemplateStrings },
+} = require('@/helpers');
+const {
+  rabbitConfigs: {
+    rabbit: { user, password, host, port, link },
+  },
+} = require('@/configs');
 
 class RabbitMQ {
   constructor() {
@@ -11,7 +15,7 @@ class RabbitMQ {
       username: user,
       password: encodeURIComponent(password),
       host,
-      port
+      port,
     });
     this.connection = null;
     this.channel = null;
@@ -40,7 +44,7 @@ class RabbitMQ {
     }
     await this.channel.assertQueue(queue, { durable: true });
     return this.channel.sendToQueue(queue, Buffer.from(message), {
-      persistent: true
+      persistent: true,
     });
   }
 

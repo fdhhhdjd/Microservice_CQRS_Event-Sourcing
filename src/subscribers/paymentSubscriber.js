@@ -1,15 +1,15 @@
-const rabbitConnection = require('../dbs/init.rabbit');
-const { handleProductReservation } = require('../app/services/productService');
-const { PAYMENT_PROCESSED } = require('../events/eventTypes');
+const { initRabbit } = require('@/dbs');
+const { handleProductReservation } = require('@/app/services/productService');
+const { PAYMENT_PROCESSED } = require('@/events/eventTypes');
 
-rabbitConnection.consume('PaymentQueue', async msgContent => {
+initRabbit.consume('PaymentQueue', async msgContent => {
   try {
     const event = JSON.parse(msgContent);
 
     if (event.eventType === PAYMENT_PROCESSED) {
       console.log(event);
       await handleProductReservation(event.aggregateId, {
-        productId: event.eventData.productId
+        productId: event.eventData.productId,
       });
     }
   } catch (error) {

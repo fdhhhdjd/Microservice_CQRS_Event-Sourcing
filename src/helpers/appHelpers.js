@@ -1,4 +1,6 @@
-const { NODE_ENV } = require('../constants/appConstants');
+const {
+  appConstants: { NODE_ENV },
+} = require('@/constants');
 
 /**
  * Checks if the current Node environment matches the specified environment.

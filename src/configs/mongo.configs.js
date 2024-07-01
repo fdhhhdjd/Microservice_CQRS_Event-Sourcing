@@ -1,4 +1,8 @@
-const { NODE_ENV } = require('../constants/appConstants');
+require('dotenv').config();
+
+const {
+  appConstants: { NODE_ENV },
+} = require('@/constants');
 
 const DEV = {
   mongo: {
@@ -9,8 +13,8 @@ const DEV = {
     database: process.env.MONGO_INIT_DB_DATABASE,
     source: process.env.MONGO_INIT_DB_SOURCE,
     link:
-      'mongodb://${username}:${password}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${source}'
-  }
+      'mongodb://${username}:${password}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${source}',
+  },
 };
 
 const PRO = {
@@ -21,13 +25,13 @@ const PRO = {
     password: process.env.MONGO_INIT_DB_ROOT_PASSWORD,
     source: process.env.MONGO_INIT_DB_SOURCE,
     link:
-      'mongodb://${username}:${password}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${source}'
-  }
+      'mongodb://${username}:${password}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${source}',
+  },
 };
 
 const configs = {
   DEV,
-  PRO
+  PRO,
 };
 
 const getConfigs = env => {

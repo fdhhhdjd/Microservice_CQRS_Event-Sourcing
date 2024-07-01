@@ -1,21 +1,19 @@
-const dbConnection = require('../dbs/init.mongo');
-const SequelizePGConnection = require('../dbs/init.sequelizePG');
-const rabbitConnection = require('../dbs/init.rabbit');
+const { initSequelizePG, initMongo, initRabbit } = require('@/dbs');
 
 const connectInit = async () => {
   //* MongoDB
-  await dbConnection.initDatabase();
+  await initMongo.initDatabase();
 
   //* PostgreSQL
-  await SequelizePGConnection.initDatabase();
+  await initSequelizePG.initDatabase();
 
   //* RabbitMQ
-  await rabbitConnection.connect();
+  await initRabbit.connect();
 
-  require('../subscribers/orderSubscriber');
-  require('../subscribers/paymentSubscriber');
-  require('../subscribers/productSubscriber');
-  require('../subscribers/notificationSubscriber');
+  require('@/subscribers/orderSubscriber');
+  require('@/subscribers/paymentSubscriber');
+  require('@/subscribers/productSubscriber');
+  require('@/subscribers/notificationSubscriber');
 };
 
 connectInit();

@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
+
 const {
-  mongo: { user, password, host, port, source, database, link }
-} = require('../configs/mongo.configs');
-const { replaceTemplateStrings } = require('../helpers/stringHelpers');
-const { NODE_ENV } = require('../constants/appConstants');
+  mongoConfigs: {
+    mongo: { user, password, host, port, source, database, link },
+  },
+} = require('@/configs');
 const {
-  _45_SECOND,
-  _5_SECOND,
-  _10_SECOND
-} = require('../constants/timeConstants');
-const { appHelpers } = require('../helpers');
+  timeConstants: { _45_SECOND, _5_SECOND, _10_SECOND },
+  appConstants: { NODE_ENV },
+} = require('@/constants');
+const {
+  appHelpers: { isNodeEnvMatch },
+  stringHelpers: { replaceTemplateStrings },
+} = require('@/helpers');
 
 class MongoDBConnection {
   constructor() {
@@ -19,7 +22,7 @@ class MongoDBConnection {
       host,
       port,
       source,
-      database
+      database,
     });
 
     this.client = {};
@@ -27,7 +30,7 @@ class MongoDBConnection {
     this.isConnected = false;
 
     mongoose.connection.once('connected', () =>
-      this.handleEventConnect(mongoose.connection)
+      this.handleEventConnect(mongoose.connection),
     );
     mongoose.connection.on('error', err => this.handleConnectionError(err));
   }
@@ -48,7 +51,7 @@ class MongoDBConnection {
   }
 
   async initDatabase(retries = 10) {
-    if (appHelpers.isNodeEnvMatch(NODE_ENV)) {
+    if (isNodeEnvMatch(NODE_ENV)) {
       mongoose.set('debug', true);
       mongoose.set('debug', { color: true });
     }
@@ -56,7 +59,7 @@ class MongoDBConnection {
     try {
       await mongoose.connect(this.URL_MONGO, {
         serverSelectionTimeoutMS: _5_SECOND,
-        socketTimeoutMS: _45_SECOND
+        socketTimeoutMS: _45_SECOND,
       });
       this.client.instanceConnect = mongoose.connection;
     } catch (err) {

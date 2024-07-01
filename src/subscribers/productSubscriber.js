@@ -1,13 +1,13 @@
-const rabbitConnection = require('../dbs/init.rabbit');
-const { handleNotification } = require('../app/services/notificationService');
-const { PRODUCT_RESERVED } = require('../events/eventTypes');
+const { initRabbit } = require('@/dbs');
+const { handleNotification } = require('@/app/services/notificationService');
+const { PRODUCT_RESERVED } = require('@/events/eventTypes');
 
-rabbitConnection.consume('ProductQueue', async msgContent => {
+initRabbit.consume('ProductQueue', async msgContent => {
   try {
     const event = JSON.parse(msgContent);
     if (event.eventType === PRODUCT_RESERVED) {
       await handleNotification(event.aggregateId, {
-        message: 'Product reserved successfully'
+        message: 'Product reserved successfully',
       });
     }
   } catch (error) {

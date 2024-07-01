@@ -1,8 +1,8 @@
-const rabbitConnection = require('../dbs/init.rabbit');
-const { handlePayment } = require('../app/services/paymentService');
-const { ORDER_CREATED } = require('../events/eventTypes');
+const { initRabbit } = require('@/dbs');
+const { handlePayment } = require('@/app/services/paymentService');
+const { ORDER_CREATED } = require('@/events/eventTypes');
 
-rabbitConnection.consume('OrderQueue', async msgContent => {
+initRabbit.consume('OrderQueue', async msgContent => {
   if (!msgContent) {
     console.error('Message content is undefined or null');
     return;
@@ -14,7 +14,7 @@ rabbitConnection.consume('OrderQueue', async msgContent => {
       await handlePayment(event.aggregateId, {
         amount: event.eventData.amount,
         orderId: event.eventData.orderId,
-        productId: event.eventData.productId
+        productId: event.eventData.productId,
       });
     }
   } catch (error) {

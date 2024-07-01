@@ -1,5 +1,7 @@
 const express = require('express');
-const { createProduct } = require('../services/productService');
+
+const { createProduct } = require('@/app/services/productService');
+
 const router = express.Router();
 
 router.post('/product', async (req, res) => {

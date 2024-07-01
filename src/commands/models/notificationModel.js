@@ -1,6 +1,6 @@
-const SequelizePGConnection = require('../../dbs/init.sequelizePG');
-
 const { DataTypes } = require('sequelize');
+
+const SequelizePGConnection = require('@/dbs/init.sequelizePG');
 
 const Notification = SequelizePGConnection.sequelize.define(
   'Notification',
@@ -9,21 +9,21 @@ const Notification = SequelizePGConnection.sequelize.define(
       type: DataTypes.UUID,
       primaryKey: true,
       allowNull: false,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     message: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     status: {
       type: DataTypes.STRING,
-      defaultValue: 'SENT'
-    }
+      defaultValue: 'SENT',
+    },
   },
   {
     tableName: 'Notification',
-    timestamps: true
-  }
+    timestamps: true,
+  },
 );
 
 (async () => {

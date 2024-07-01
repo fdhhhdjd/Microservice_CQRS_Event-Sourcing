@@ -1,8 +1,13 @@
 const { Sequelize } = require('sequelize');
+
 const {
-  pg: { user, password, host, port, database }
-} = require('../configs/pg.configs');
-const { _5_SECOND, _10_SECOND } = require('../constants/timeConstants');
+  pgConfigs: {
+    pg: { user, password, host, port, database },
+  },
+} = require('@/configs');
+const {
+  timeConstants: { _5_SECOND, _10_SECOND },
+} = require('@/constants');
 
 class SequelizePGConnection {
   constructor() {
@@ -12,14 +17,14 @@ class SequelizePGConnection {
       dialect: 'postgres',
       logging: false,
       pool: {
-        max: 10, // Số lượng kết nối tối đa
-        min: 0, // Số lượng kết nối tối thiểu
-        acquire: _10_SECOND, // Thời gian tối đa (ms) pool sẽ thử kết nối trước khi báo lỗi
-        idle: _5_SECOND // Thời gian một kết nối được giữ mở mà không sử dụng trước khi được giải phóng
+        max: 10,
+        min: 0,
+        acquire: _10_SECOND,
+        idle: _5_SECOND,
       },
-      logging: false, // Bật log để theo dõi các truy vấn (có thể thay thế bằng hàm tùy chỉnh hoặc thư viện log)
-      benchmark: true, // Hiển thị thời gian thực thi truy vấn
-      isolationLevel: Sequelize.Transaction.ISOLATION_LEVELS.REPEATABLE_READ // Mức độ cô lập giao dịch
+      logging: false,
+      benchmark: true, // show query log
+      isolationLevel: Sequelize.Transaction.ISOLATION_LEVELS.REPEATABLE_READ,
     });
     this.connectTimeout = undefined;
     this.isConnected = false;

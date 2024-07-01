@@ -1,6 +1,6 @@
-const SequelizePGConnection = require('../../dbs/init.sequelizePG');
-
 const { DataTypes } = require('sequelize');
+
+const SequelizePGConnection = require('@/dbs/init.sequelizePG');
 
 const Product = SequelizePGConnection.sequelize.define(
   'Product',
@@ -9,21 +9,21 @@ const Product = SequelizePGConnection.sequelize.define(
       type: DataTypes.UUID,
       primaryKey: true,
       allowNull: false,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     stock: {
       type: DataTypes.INTEGER,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   {
     tableName: 'Products',
-    timestamps: true
-  }
+    timestamps: true,
+  },
 );
 
 (async () => {
