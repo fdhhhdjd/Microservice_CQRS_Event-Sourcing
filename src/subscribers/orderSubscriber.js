@@ -1,6 +1,8 @@
 const { initRabbit } = require('@/dbs');
 const { handlePayment } = require('@/app/v1/services/paymentService');
-const { ORDER_CREATED } = require('@/events/eventTypes');
+const {
+  eventConstants: { ORDER_CREATED },
+} = require('@/constants');
 
 initRabbit.consume('OrderQueue', async msgContent => {
   if (!msgContent) {

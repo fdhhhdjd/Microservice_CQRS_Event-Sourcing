@@ -1,16 +1,16 @@
 const { v4: uuidv4 } = require('uuid');
 
-const { saveEvent } = require('@/events/eventStore');
 const {
-  ORDER_CREATED,
-  PAYMENT_PROCESSED,
-  PRODUCT_RESERVED,
-  NOTIFICATION_SENT,
-} = require('@/events/eventTypes');
-const rabbitConnection = require('@/dbs/init.rabbit');
-const Order = require('@/commands/models/orderModel');
-const Payment = require('@/commands/models/PaymentModel');
-const Product = require('@/commands/models/productModel');
+  eventConstants: {
+    ORDER_CREATED,
+    PAYMENT_PROCESSED,
+    PRODUCT_RESERVED,
+    NOTIFICATION_SENT,
+  },
+} = require('@/constants');
+const { initRabbit } = require('@/dbs');
+const { Order, Payment, Product } = require('@/commands/models');
+const { saveEvent } = require('@/events/handlers');
 
 const createOrder = async orderData => {
   const aggregateId = uuidv4();
@@ -25,7 +25,7 @@ const createOrder = async orderData => {
 
   await Order.create({ id: uuidv4(), ...eventData });
 
-  await rabbitConnection.publish('OrderQueue', JSON.stringify(event));
+  await initRabbit.publish('OrderQueue', JSON.stringify(event));
   return event;
 };
 
@@ -33,7 +33,7 @@ const processPayment = async (paymentId, paymentData) => {
   const event = await saveEvent(paymentId, PAYMENT_PROCESSED, paymentData);
   await Payment.create({ id: paymentId, ...paymentData });
 
-  await rabbitConnection.publish('PaymentQueue', JSON.stringify(event));
+  await initRabbit.publish('PaymentQueue', JSON.stringify(event));
   return event;
 };
 
@@ -45,7 +45,7 @@ const reserveProduct = async (productId, productData) => {
     product.stock -= 1;
     await product.save();
     const event = await saveEvent(productId, PRODUCT_RESERVED, productData);
-    await rabbitConnection.publish('ProductQueue', JSON.stringify(event));
+    await initRabbit.publish('ProductQueue', JSON.stringify(event));
     return event;
   } else {
     throw new Error('Product not found');
@@ -58,7 +58,7 @@ const sendNotification = async (notificationId, notificationData) => {
     NOTIFICATION_SENT,
     notificationData,
   );
-  await rabbitConnection.publish('NotificationQueue', JSON.stringify(event));
+  await initRabbit.publish('NotificationQueue', JSON.stringify(event));
   return event;
 };
 

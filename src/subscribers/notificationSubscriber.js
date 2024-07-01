@@ -1,6 +1,8 @@
 const { initRabbit } = require('@/dbs');
-const { NOTIFICATION_SENT } = require('@/events/eventTypes');
-const Notification = require('@/commands/models/notificationModel');
+const {
+  eventConstants: { NOTIFICATION_SENT },
+} = require('@/constants');
+const { Notification } = require('@/commands/models');
 
 initRabbit.consume('NotificationQueue', async msgContent => {
   const event = JSON.parse(msgContent);

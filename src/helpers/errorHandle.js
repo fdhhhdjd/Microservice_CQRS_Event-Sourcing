@@ -2,6 +2,7 @@
 
 const { NotFoundError } = require('@/cors/error.response');
 const { StatusCodes, ErrorCodes, ReasonPhrases } = require('@/utils');
+const { isNodeEnvMatch } = require('./appHelpers');
 
 // Handle 404 - Not Found
 const notFoundHandler = (_, __, next) => {
@@ -17,13 +18,19 @@ const errorHandler = (error, __, res, ____) => {
   const errorDetails = error.details || [];
   const errorTime = error.timestamp || new Date().getTime();
 
-  res.status(statusCode).json({
+  const response = {
     code: errorCode,
     status: statusCode,
     message: errorMessage,
     timestamp: errorTime,
     details: errorDetails,
-  });
+  };
+
+  if (isNodeEnvMatch()) {
+    response.stack = error.stack;
+  }
+
+  return res.status(statusCode).json(response);
 };
 
 module.exports = {

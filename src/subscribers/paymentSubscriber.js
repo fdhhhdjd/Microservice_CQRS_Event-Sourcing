@@ -2,7 +2,9 @@ const { initRabbit } = require('@/dbs');
 const {
   handleProductReservation,
 } = require('@/app/v1/services/productService');
-const { PAYMENT_PROCESSED } = require('@/events/eventTypes');
+const {
+  eventConstants: { PAYMENT_PROCESSED },
+} = require('@/constants');
 
 initRabbit.consume('PaymentQueue', async msgContent => {
   try {

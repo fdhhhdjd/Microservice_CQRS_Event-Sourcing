@@ -1,7 +1,8 @@
 'use strict';
 
-const { ReasonPhrases, StatusCodes } = require('@/utils');
 const express = require('express');
+
+const { ReasonPhrases, StatusCodes } = require('@/utils');
 
 const router = express.Router();
 

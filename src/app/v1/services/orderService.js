@@ -1,4 +1,4 @@
-const { createOrder } = require('@/commands/handlers/handlers');
+const { createOrder } = require('@/commands/handlers');
 
 const createNewOrder = async orderData => {
   return await createOrder(orderData);

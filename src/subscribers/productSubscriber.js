@@ -1,6 +1,8 @@
 const { initRabbit } = require('@/dbs');
 const { handleNotification } = require('@/app/v1/services/notificationService');
-const { PRODUCT_RESERVED } = require('@/events/eventTypes');
+const {
+  eventConstants: { PRODUCT_RESERVED },
+} = require('@/constants');
 
 initRabbit.consume('ProductQueue', async msgContent => {
   try {

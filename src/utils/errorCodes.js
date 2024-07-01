@@ -69,6 +69,12 @@ module.exports = {
     description:
       'The server cannot process the request due to client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).',
   },
+  PATH_TRAVERSAL: {
+    code: 400002,
+    message: 'Path Traversal',
+    description:
+      'The request contains input that may attempt to access files or directories that are outside of the intended directory.',
+  },
   UNAUTHORIZED: {
     code: 401001,
     message: 'Unauthorized',
