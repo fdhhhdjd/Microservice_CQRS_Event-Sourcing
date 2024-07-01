@@ -69,18 +69,35 @@ module.exports = {
     description:
       'The server cannot process the request due to client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).',
   },
+
   PATH_TRAVERSAL: {
     code: 400002,
     message: 'Path Traversal',
     description:
       'The request contains input that may attempt to access files or directories that are outside of the intended directory.',
   },
+
+  SANITIZE_PARAMS: {
+    code: 400003,
+    message: 'Sanitize Params',
+    description:
+      'The request contains parameters that need to be sanitized before processing.',
+  },
+
   UNAUTHORIZED: {
     code: 401001,
     message: 'Unauthorized',
     description:
       'The request has not been applied because it lacks valid authentication credentials for the target resource.',
   },
+
+  TOO_MANY_REQUESTS: {
+    code: 429001,
+    TOO_MANY_REQUESTS: 'Too Many Requests',
+    description:
+      'The user has sent too many requests in a given amount of time.',
+  },
+
   FORBIDDEN: {
     code: 403001,
     message: 'Forbidden',

@@ -8,6 +8,7 @@ const BadRequestRequestError = require('./error.response')
 const NotFoundError = require('./error.response').NotFoundError;
 const ForbiddenError = require('./error.response').ForbiddenError;
 const InternalServerError = require('./error.response').InternalServerError;
+const TooManyRequestError = require('./error.response').TooManyRequestError;
 
 module.exports = {
   // Success
@@ -18,4 +19,5 @@ module.exports = {
   NotFoundError,
   ForbiddenError,
   InternalServerError,
+  TooManyRequestError,
 };

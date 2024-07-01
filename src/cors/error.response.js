@@ -24,6 +24,17 @@ class BadRequestRequestError extends ErrorResponse {
   }
 }
 
+class TooManyRequestError extends ErrorResponse {
+  constructor({
+    message = reasonPhrases.TOO_MANY_REQUESTS,
+    statusCode = statusCodes.TOO_MANY_REQUESTS,
+    code = errorCodes.TOO_MANY_REQUESTS.code,
+    details,
+  } = {}) {
+    super(message, statusCode, code, details);
+  }
+}
+
 class NotFoundError extends ErrorResponse {
   constructor({
     message = reasonPhrases.NOT_FOUND,
@@ -63,6 +74,7 @@ module.exports = {
   BadRequestRequestError,
   NotFoundError,
   ForbiddenError,
+  TooManyRequestError,
 
   // 5xx
   InternalServerError,
