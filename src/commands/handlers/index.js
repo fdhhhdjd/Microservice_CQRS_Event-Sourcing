@@ -1,12 +1,9 @@
-const {
-  createOrder,
-  processPayment,
-  reserveProduct,
-  sendNotification,
-} = require('./handlers');
+const { createOrder } = require('./orderHandlers');
+const { reserveProduct } = require('./productHandlers');
+const { processPayment } = require('./paymentHandlers');
+const { sendNotification } = require('./notificationHandlers');
 
 module.exports = {
-  // *Handlers
   createOrder,
   processPayment,
   reserveProduct,

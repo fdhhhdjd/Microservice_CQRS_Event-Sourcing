@@ -42,8 +42,9 @@ const pathTraversalMiddleware = (req, __, next) => {
     // Sanitize body if present
     if (req.body) {
       for (const key in req.body) {
-        const sanitizedValue = xss(req.body[key]);
-        if (sanitizedValue !== req.body[key]) {
+        const value = req.body[key];
+        const sanitizedValue = typeof value === 'string' ? xss(value) : value;
+        if (sanitizedValue !== value) {
           throw new BadRequestRequestError({
             code: ErrorCodes.SANITIZE_PARAMS.code,
             message: `Path traversal attempt detected in body parameter: ${key}`,
