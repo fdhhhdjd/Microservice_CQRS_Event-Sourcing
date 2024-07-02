@@ -7,6 +7,11 @@ const DailyRotateFile = require('winston-daily-rotate-file');
 
 const logsDirectory = path.join(__dirname, '../logs');
 
+const createFilter = level =>
+  format(info => {
+    return info.level === level ? info : false;
+  })();
+
 const logFormat = format.printf(
   ({ level, message, context, requestId, timestamp, metadata }) => {
     return `${timestamp} - ${level.toUpperCase()} - ${context} - ${requestId} - ${message} - ${JSON.stringify(
@@ -24,18 +29,25 @@ const createTransport = level => {
     maxSize: '20m',
     maxFiles: '14d',
     level,
+    format: format.combine(
+      format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+      logFormat,
+      createFilter(level),
+    ),
   });
 };
 
 class MyLogger {
   constructor() {
     this.logger = createLogger({
-      format: format.combine(
-        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-        logFormat,
-      ),
       transports: [
-        new transports.Console(),
+        new transports.Console({
+          format: format.combine(
+            format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+            logFormat,
+          ),
+          level: 'info',
+        }),
         createTransport('info'),
         createTransport('error'),
         createTransport('warn'),
@@ -60,7 +72,6 @@ class MyLogger {
   }
 
   warn(message, params) {
-    // Added method for warning logs
     this.logger.warn({ message, ...this.commonParams(params) });
   }
 }

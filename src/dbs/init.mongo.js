@@ -7,7 +7,7 @@ const {
 } = require('@/configs');
 const {
   timeConstants: { _45_SECOND, _5_SECOND, _10_SECOND },
-  appConstants: { NODE_ENV },
+  appConstants: { NODE_ENVS },
 } = require('@/constants');
 const {
   appHelpers: { isNodeEnvMatch },
@@ -51,7 +51,7 @@ class MongoDBConnection {
   }
 
   async initDatabase(retries = 10) {
-    // if (isNodeEnvMatch(NODE_ENV)) {
+    // if (isNodeEnvMatch(NODE_ENVS[0])) {
     //   mongoose.set('debug', true);
     //   mongoose.set('debug', { color: true });
     // }

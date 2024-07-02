@@ -12,6 +12,14 @@ const {
 const pathTraversalMiddleware = require('@/middlewares/pathTraversalMiddleware');
 const loggerMiddleware = require('@/middlewares/loggerMiddleware');
 const requestSizeLimiterMiddleware = require('@/middlewares/requestSizeLimiterMiddleware');
+const monitoringMiddleware = require('@/middlewares/monitoringMiddleware');
+const {
+  appHelpers: { isNodeEnvMatch },
+} = require('@/helpers');
+
+const {
+  appConstants: { NODE_ENVS },
+} = require('@/constants');
 
 require('dotenv').config();
 const app = express();
@@ -30,7 +38,11 @@ app.use(cors(getCorsOptions()));
 app.use(requestSizeLimiterMiddleware);
 app.use(pathTraversalMiddleware);
 app.use(morgan(getMorganFormat()));
-app.use(loggerMiddleware);
+
+if (isNodeEnvMatch(NODE_ENVS[1])) {
+  app.use(loggerMiddleware);
+  app.use(monitoringMiddleware);
+}
 
 //* GLOBAL
 require('@/globals/globals');

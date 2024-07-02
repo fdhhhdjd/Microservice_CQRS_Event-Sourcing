@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const {
-  appConstants: { NODE_ENV },
+  appConstants: { NODE_ENVS },
 } = require('@/constants');
 
 const DEV = {
@@ -40,6 +40,6 @@ const getConfigs = env => {
   return null;
 };
 
-const env = process.env.NODE_ENV || NODE_ENV;
+const env = process.env.NODE_ENV || NODE_ENVS[0];
 
 module.exports = getConfigs(env);

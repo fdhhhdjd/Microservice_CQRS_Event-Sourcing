@@ -1,3 +1,3 @@
 module.exports = {
-  NODE_ENV: 'DEV',
+  NODE_ENVS: ['DEV', 'PRO', 'TEST'],
 };

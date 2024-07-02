@@ -1,7 +1,7 @@
 'use strict';
 
 const {
-  appConstants: { NODE_ENV },
+  appConstants: { NODE_ENVS },
 } = require('@/constants');
 
 /**
@@ -9,7 +9,7 @@ const {
  * @param {string} [node=NODE_ENV] - The Node environment to check against. Defaults to the value of `process.env.NODE_ENV`.
  * @returns {boolean} - Returns `true` if the current Node environment matches the specified environment, `false` otherwise.
  */
-const isNodeEnvMatch = (node = NODE_ENV) => {
+const isNodeEnvMatch = (node = NODE_ENVS[0]) => {
   return process.env.NODE_ENV === node;
 };
 

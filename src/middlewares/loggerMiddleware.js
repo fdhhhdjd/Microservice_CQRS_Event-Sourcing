@@ -8,9 +8,10 @@ const loggerMiddleware = (req, __, next) => {
   const requestId = req.headers['x-request-id'];
   req.requestId = requestId ? requestId : uuid();
 
-  MyLogger.log(`input params::${req.method}`, [
+  const logMessage = `input params::${req.method} - IP: ${req.ip}`;
+  MyLogger.log(logMessage, [
     req.path,
-    { requestId: req.requestId },
+    { requestId: req.requestId, ip: req.ip },
     req.method === 'POST' ? req.body : req.query,
   ]);
 
