@@ -3,4 +3,5 @@ module.exports = {
   initSequelizePG: require('./init.sequelizePG'),
   initRabbit: require('./init.rabbit'),
   initIoRedis: require('./init.redis'),
+  initSocket: require('./init.socket'),
 };

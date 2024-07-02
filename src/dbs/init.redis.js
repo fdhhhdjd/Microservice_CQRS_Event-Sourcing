@@ -50,7 +50,8 @@ class IoRedisConnection {
   handleConnectionError(err) {
     console.error('Redis connection error', err);
     this.isConnected = false;
-    if (this.client.status !== 'connecting' && this.client.status !== 'connect') {
+    const status = this.client.status;
+    if (status !== 'connecting' && status !== 'connect') {
       this.initCache();
     }
   }
