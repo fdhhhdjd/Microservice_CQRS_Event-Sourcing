@@ -16,6 +16,7 @@ services:
       - mongodb_data:/data/db
     ports:
       - "${MONGO_INIT_DB_PORT}:${MONGO_INIT_DB_PORT}"
+    networks: [ "microservices" ]
 
   postgres:
     image: postgres:latest
@@ -31,6 +32,7 @@ services:
       - .env
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    networks: [ "microservices" ]
 
   rabbitmq:
     image: rabbitmq:management
@@ -49,8 +51,12 @@ services:
       NAME: "rabbitmq"
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
+    networks: [ "microservices" ]
 
     
+networks:
+  microservices:
+    name: microservices
 
 volumes:
   mongodb_data:
