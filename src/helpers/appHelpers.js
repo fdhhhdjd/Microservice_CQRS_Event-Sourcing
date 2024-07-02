@@ -19,11 +19,7 @@ const isNodeEnvMatch = (node = NODE_ENVS[0]) => {
  */
 const getCorsOptions = () => {
   return {
-    origin: [
-      'http://localhost:5173',
-      'http://127.0.0.1:5173',
-      'https://profile-forme.com',
-    ],
+    origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://profile-forme.com'],
     methods: 'GET, POST, PUT, DELETE, OPTIONS',
     allowedHeaders:
       'Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With, X-Device-Id',

@@ -15,12 +15,7 @@ const { getNodeApp } = require('./appHelpers');
  * @param {string} [options.action=SEND] - The action.
  * @returns {string} The generated queue name.
  */
-const generateQueueName = ({
-  app = MY_APP,
-  env = getNodeApp(),
-  feature = ANONYMS,
-  action = SEND,
-}) => {
+const generateQueueName = ({ app = MY_APP, env = getNodeApp(), feature = ANONYMS, action = SEND }) => {
   return `${app}.${env}.${feature}.${action}`;
 };
 

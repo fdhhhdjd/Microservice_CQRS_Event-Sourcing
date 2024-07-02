@@ -2,12 +2,7 @@ const reasonPhrases = require('@/utils/reasonPhrases');
 const statusCodes = require('@/utils/statusCodes');
 
 class SuccessResponse {
-  constructor({
-    message,
-    statusCode = statusCodes.OK,
-    reasonStatusCode = reasonPhrases.OK,
-    metadata = {},
-  }) {
+  constructor({ message, statusCode = statusCodes.OK, reasonStatusCode = reasonPhrases.OK, metadata = {} }) {
     this.message = message || reasonStatusCode;
     this.status = statusCode;
     this.metadata = metadata;

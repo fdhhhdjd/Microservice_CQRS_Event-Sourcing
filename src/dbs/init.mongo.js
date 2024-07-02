@@ -29,9 +29,7 @@ class MongoDBConnection {
     this.connectTimeout = undefined;
     this.isConnected = false;
 
-    mongoose.connection.once('connected', () =>
-      this.handleEventConnect(mongoose.connection),
-    );
+    mongoose.connection.once('connected', () => this.handleEventConnect(mongoose.connection));
     mongoose.connection.on('error', err => this.handleConnectionError(err));
   }
 

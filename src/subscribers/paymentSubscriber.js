@@ -1,7 +1,5 @@
 const { initRabbit } = require('@/dbs');
-const {
-  handleProductReservation,
-} = require('@/app/v1/services/productService');
+const { handleProductReservation } = require('@/app/v1/services/productService');
 const {
   eventConstants: { PAYMENT_PROCESSED },
   messageQueueConstants: { PAYMENT, PROCESSED },

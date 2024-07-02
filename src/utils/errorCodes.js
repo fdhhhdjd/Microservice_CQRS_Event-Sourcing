@@ -3,8 +3,7 @@ module.exports = {
   CONTINUE: {
     code: 100001,
     message: 'Continue',
-    description:
-      'The server has received the request headers and the client should proceed to send the request body.',
+    description: 'The server has received the request headers and the client should proceed to send the request body.',
   },
   SWITCHING_PROTOCOLS: {
     code: 101001,
@@ -26,20 +25,17 @@ module.exports = {
   CREATED: {
     code: 201001,
     message: 'Created',
-    description:
-      'The request has been fulfilled, resulting in the creation of a new resource.',
+    description: 'The request has been fulfilled, resulting in the creation of a new resource.',
   },
   ACCEPTED: {
     code: 202001,
     message: 'Accepted',
-    description:
-      'The request has been accepted for processing, but the processing has not been completed.',
+    description: 'The request has been accepted for processing, but the processing has not been completed.',
   },
   NO_CONTENT: {
     code: 204001,
     message: 'No Content',
-    description:
-      'The server successfully processed the request and is not returning any content.',
+    description: 'The server successfully processed the request and is not returning any content.',
   },
 
   // Redirection 3xx
@@ -80,8 +76,7 @@ module.exports = {
   SANITIZE_PARAMS: {
     code: 400003,
     message: 'Sanitize Params',
-    description:
-      'The request contains parameters that need to be sanitized before processing.',
+    description: 'The request contains parameters that need to be sanitized before processing.',
   },
 
   UNAUTHORIZED: {
@@ -94,15 +89,13 @@ module.exports = {
   TOO_MANY_REQUESTS: {
     code: 429001,
     TOO_MANY_REQUESTS: 'Too Many Requests',
-    description:
-      'The user has sent too many requests in a given amount of time.',
+    description: 'The user has sent too many requests in a given amount of time.',
   },
 
   FORBIDDEN: {
     code: 403001,
     message: 'Forbidden',
-    description:
-      'The server understood the request but refuses to authorize it.',
+    description: 'The server understood the request but refuses to authorize it.',
   },
   NOT_FOUND: {
     code: 404001,
@@ -120,14 +113,12 @@ module.exports = {
   INTERNAL_SERVER_ERROR: {
     code: 500001,
     message: 'Internal Server Error',
-    description:
-      'The server encountered an unexpected condition that prevented it from fulfilling the request.',
+    description: 'The server encountered an unexpected condition that prevented it from fulfilling the request.',
   },
   NOT_IMPLEMENTED: {
     code: 501001,
     message: 'Not Implemented',
-    description:
-      'The server does not support the functionality required to fulfill the request.',
+    description: 'The server does not support the functionality required to fulfill the request.',
   },
   SERVICE_UNAVAILABLE: {
     code: 503001,

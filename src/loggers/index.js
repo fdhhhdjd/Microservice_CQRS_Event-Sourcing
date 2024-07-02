@@ -12,13 +12,9 @@ const createFilter = level =>
     return info.level === level ? info : false;
   })();
 
-const logFormat = format.printf(
-  ({ level, message, context, requestId, timestamp, metadata }) => {
-    return `${timestamp} - ${level.toUpperCase()} - ${context} - ${requestId} - ${message} - ${JSON.stringify(
-      metadata,
-    )}`;
-  },
-);
+const logFormat = format.printf(({ level, message, context, requestId, timestamp, metadata }) => {
+  return `${timestamp} - ${level.toUpperCase()} - ${context} - ${requestId} - ${message} - ${JSON.stringify(metadata)}`;
+});
 
 const createTransport = level => {
   return new DailyRotateFile({
@@ -29,11 +25,7 @@ const createTransport = level => {
     maxSize: '20m',
     maxFiles: '14d',
     level,
-    format: format.combine(
-      format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-      logFormat,
-      createFilter(level),
-    ),
+    format: format.combine(format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), logFormat, createFilter(level)),
   });
 };
 
@@ -42,10 +34,7 @@ class MyLogger {
     this.logger = createLogger({
       transports: [
         new transports.Console({
-          format: format.combine(
-            format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-            logFormat,
-          ),
+          format: format.combine(format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), logFormat),
           level: 'info',
         }),
         createTransport('info'),
@@ -56,9 +45,7 @@ class MyLogger {
   }
 
   commonParams(params) {
-    const [context = '', req = {}, metadata = {}] = Array.isArray(params)
-      ? params
-      : [params];
+    const [context = '', req = {}, metadata = {}] = Array.isArray(params) ? params : [params];
     const requestId = req.requestId || uuid();
     return { requestId, context, metadata };
   }

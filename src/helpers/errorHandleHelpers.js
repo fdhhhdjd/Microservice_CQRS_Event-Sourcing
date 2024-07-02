@@ -30,9 +30,7 @@ const errorHandler = (error, req, res, ____) => {
     const elapsedTimeString = formatElapsedTime(elapsedTime);
 
     // Log the error with IP included
-    const reqMessage = `${statusCode} - ${elapsedTimeString} - IP: ${
-      req.ip
-    } - Response: ${JSON.stringify(error)}`;
+    const reqMessage = `${statusCode} - ${elapsedTimeString} - IP: ${req.ip} - Response: ${JSON.stringify(error)}`;
 
     MyLogger.error(reqMessage, [
       req.path,

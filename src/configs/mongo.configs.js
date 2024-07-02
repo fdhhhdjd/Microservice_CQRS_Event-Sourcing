@@ -12,8 +12,7 @@ const DEV = {
     password: process.env.MONGO_INIT_DB_ROOT_PASSWORD,
     database: process.env.MONGO_INIT_DB_DATABASE,
     source: process.env.MONGO_INIT_DB_SOURCE,
-    link:
-      'mongodb://${username}:${password}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${source}',
+    link: 'mongodb://${username}:${password}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${source}',
   },
 };
 
@@ -24,8 +23,7 @@ const PRO = {
     user: process.env.MONGO_INIT_DB_ROOT_USERNAME,
     password: process.env.MONGO_INIT_DB_ROOT_PASSWORD,
     source: process.env.MONGO_INIT_DB_SOURCE,
-    link:
-      'mongodb://${username}:${password}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${source}',
+    link: 'mongodb://${username}:${password}@${host}:${port}/${database}?authMechanism=DEFAULT&authSource=${source}',
   },
 };
 

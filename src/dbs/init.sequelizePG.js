@@ -60,9 +60,7 @@ class SequelizePGConnection {
   closeDatabase() {
     if (this.isConnected) {
       clearTimeout(this.connectTimeout);
-      this.sequelize
-        .close()
-        .then(() => console.info('Disconnected from PostgreSQL database.'));
+      this.sequelize.close().then(() => console.info('Disconnected from PostgreSQL database.'));
     }
   }
 }
