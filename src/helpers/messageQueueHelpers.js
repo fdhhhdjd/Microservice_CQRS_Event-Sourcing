@@ -1,3 +1,5 @@
+'use strict';
+
 const {
   messageQueueConstants: { MY_APP, SEND, ANONYMS },
 } = require('@/constants');

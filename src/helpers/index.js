@@ -4,4 +4,5 @@ module.exports = {
   formatTimeHelpers: require('./formatElapsedTimeHelpers'),
   errorHandleHelpers: require('./errorHandleHelpers'),
   messageQueueHelpers: require('./messageQueueHelpers'),
+  cacheHelpers: require('./cacheHelpers'),
 };

@@ -6,4 +6,7 @@ module.exports = {
 
   // Minutes
   _1_MINUTE: 60 * 1000,
+
+  // Days
+  _1_DAY: 24 * 60 * 60 * 1000,
 };

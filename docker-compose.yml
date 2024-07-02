@@ -50,6 +50,8 @@ services:
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
 
+    
+
 volumes:
   mongodb_data:
   db_data:

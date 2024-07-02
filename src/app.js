@@ -47,7 +47,7 @@ if (isNodeEnvMatch(NODE_ENVS[1])) {
 }
 
 //* GLOBAL
-require('@/globals/globals');
+require('@/globals');
 
 //* GROUP VERSION ROUTES
 const apiRouter = express.Router();

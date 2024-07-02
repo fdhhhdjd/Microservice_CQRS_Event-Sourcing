@@ -3,4 +3,5 @@ module.exports = {
   timeConstants: require('./timeConstants'),
   eventConstants: require('./eventConstants'),
   messageQueueConstants: require('./messageQueueConstants'),
+  CacheConstants: require('./CacheConstants'),
 };
