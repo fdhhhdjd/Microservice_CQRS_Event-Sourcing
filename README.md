@@ -37,25 +37,28 @@ This project implements a Command Query Responsibility Segregation (CQRS) and Ev
     ├── app/
     │   └── v1/
     │       ├── controllers/
+    │       ├── models/
     │       ├── routes/
-    │       ├── services/
-    │       └── models/
+    │       └── services/
     ├── commands/
     │   ├── handlers/
     │   └── models/
     ├── configs/
     ├── constants/
+    ├── cors/
     ├── dbs/
     ├── events/
     │   ├── models/
     │   └── subscribers/
     ├── globals/
     ├── helpers/
+    ├── middlewares/
     ├── models/
     ├── queries/
     │   ├── handlers/
     │   └── models/
-    └── subscribers/
+    ├── subscribers/
+    └── utils/
 ```
 
 This README.md file outlines the directory structure of a software project that follows the Command Query Responsibility Segregation (CQRS) and Event Sourcing (ES) patterns. Here's a breakdown of the structure and the purpose of each directory:
@@ -81,60 +84,78 @@ This README.md file outlines the directory structure of a software project that 
   - `server.js`: Điểm nhập chính cho ứng dụng Node.js.
   - `src/`: Mã nguồn của ứng dụng, được tổ chức vào các thư mục cụ thể cho CQRS và ES.
     - `app.js`: Kịch bản ứng dụng chính.
+    - `app/`: Chứa mã nguồn cụ thể cho các ứng dụng, bao gồm controllers, models, routes, và services.
+      - `v1/`: Thư mục cho phiên bản 1 của API, bao gồm controllers, models, routes, và services.
+        - `controllers/`: Xử lý các yêu cầu đến từ người dùng và trả về phản hồi.
+        - `models/`: Định nghĩa cấu trúc dữ liệu và mô hình.
+        - `routes/`: Định nghĩa các tuyến đường API.
+        - `services/`: Xử lý logic nghiệp vụ.
     - `commands/`: Chứa các trình xử lý lệnh và mô hình, xử lý các thao tác ghi.
       - `handlers/`: Logic để xử lý các lệnh.
       - `models/`: Mô hình đặc biệt cho phía lệnh của CQRS.
     - `configs/`: Các tệp cấu hình cho cơ sở dữ liệu và các dịch vụ khác.
     - `constants/`: Hằng số được sử dụng trong toàn bộ ứng dụng.
+    - `cors/`: Cấu hình cho Cross-Origin Resource Sharing.
     - `dbs/`: Kịch bản khởi tạo cơ sở dữ liệu.
     - `events/`: Chứa các mô hình sự kiện và người đăng ký, trung tâm của Event Sourcing.
       - `models/`: Mô hình đại diện cho các sự kiện trong hệ thống.
       - `subscribers/`: Các trình xử lý phản ứng với sự kiện.
     - `globals/`: Biến toàn cục hoặc cấu hình.
     - `helpers/`: Các hàm tiện ích và trợ giúp.
+    - `middlewares/`: Chứa các middleware cho Express, như xác thực, ghi log, v.v.
     - `models/`: Mô hình chung cho ứng dụng, phản ánh trạng thái hiện tại sau khi áp dụng sự kiện.
     - `queries/`: Chứa các trình xử lý truy vấn và mô hình, xử lý các thao tác đọc.
       - `handlers/`: Logic để xử lý truy vấn.
       - `models/`: Mô hình đặc biệt cho phía truy vấn của CQRS.
     - `subscribers/`: Được cập nhật để xử lý sự kiện từ lệnh/truy vấn, tạo điều kiện cho bản chất phản ứng của hệ thống.
+    - `utils/`: Chứa các hàm tiện ích dùng chung trong toàn bộ ứng dụng.
 
 # English 🏴󠁧󠁢󠁥󠁮󠁧󠁿
 
-- `.`: Root directory of the project, containing configuration files and directories for project setup.
-  - `.dockerignore`: Specifies files and directories to ignore when building Docker images.
+- `.`: The project's root directory, containing configuration files and setup directories.
+  - `.dockerignore`: Specifies files and directories to ignore when building a Docker image.
   - `.env` and `.env.example`: Environment configuration files, with `.env.example` serving as a template.
   - `.gitignore`: Lists files and directories that Git should ignore.
   - `.vscode/`: Contains settings specific to Visual Studio Code.
     - `settings.json`: Configuration settings for VS Code.
   - `docker/`: Contains Docker-related files.
-    - `Dockerfile`: Instructions for building a Docker image.
+    - `Dockerfile`: Instructions to build the Docker image.
   - `docker-compose.yml`: Defines and runs multi-container Docker applications.
-  - `git.sh`: A shell script related to Git operations, useful for automation.
+  - `git.sh`: A shell script related to Git operations, potentially used for automation.
   - `makefile`: Defines a set of tasks to be executed.
-  - `mongo/`: Specific configurations for MongoDB and initialization scripts.
+  - `mongo/`: Specific configuration for MongoDB and initialization scripts.
     - `conf/`: Contains MongoDB configuration files.
-    - `init.sh`: Script for initializing MongoDB.
+    - `init.sh`: Script to initialize MongoDB.
   - `package.json`: Defines npm package dependencies and scripts.
   - `README.md`: This file, describing the project and its structure.
-  - `server.js`: Main entry point for the Node.js application.
-  - `src/`: Application source code, organized into specific directories for CQRS and ES.
-    - `app.js`: Main application script.
+  - `server.js`: The main entry point for the Node.js application.
+  - `src/`: The application’s source code, organized into directories for CQRS and ES.
+    - `app.js`: The main application script.
+    - `app/`: Contains application-specific code, including controllers, models, routes, and services.
+      - `v1/`: Directory for version 1 of the API, including controllers, models, routes, and services.
+        - `controllers/`: Handles incoming user requests and returns responses.
+        - `models/`: Defines data structures and models.
+        - `routes/`: Defines API routes.
+        - `services/`: Handles business logic.
     - `commands/`: Contains command handlers and models, handling write operations.
-      - `handlers/`: Logic to handle commands.
+      - `handlers/`: Logic for handling commands.
       - `models/`: Models specific to the command side of CQRS.
     - `configs/`: Configuration files for databases and other services.
     - `constants/`: Constants used throughout the application.
+    - `cors/`: Configuration for Cross-Origin Resource Sharing.
     - `dbs/`: Database initialization scripts.
     - `events/`: Contains event models and subscribers, central to Event Sourcing.
       - `models/`: Models representing events in the system.
-      - `subscribers/`: Handlers that react to events.
+      - `subscribers/`: Handlers reacting to events.
     - `globals/`: Global variables or configurations.
     - `helpers/`: Utility functions and helpers.
-    - `models/`: General models for the application, reflecting the current state after applying events.
+    - `middlewares/`: Contains middleware for Express, such as authentication, logging, etc.
+    - `models/`: Common models for the application, reflecting the current state after event application.
     - `queries/`: Contains query handlers and models, handling read operations.
-      - `handlers/`: Logic to handle queries.
+      - `handlers/`: Logic for handling queries.
       - `models/`: Models specific to the query side of CQRS.
-    - `subscribers/`: Updated to handle events from commands/queries, facilitating the reactive nature of the system.
+    - `subscribers/`: Updated to handle events from command/query, facilitating the system's reactive nature.
+    - `utils/`: Contains utility functions shared across the application.
 
 This structure supports the separation of concerns as advocated by CQRS and leverages Event Sourcing for maintaining the state of the application through events.
 
