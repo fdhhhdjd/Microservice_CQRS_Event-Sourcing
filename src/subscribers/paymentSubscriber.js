@@ -4,9 +4,15 @@ const {
 } = require('@/app/v1/services/productService');
 const {
   eventConstants: { PAYMENT_PROCESSED },
+  messageQueueConstants: { PAYMENT, PROCESSED },
 } = require('@/constants');
+const {
+  messageQueueHelpers: { generateQueueName },
+} = require('@/helpers');
 
-initRabbit.consume('PaymentQueue', async msgContent => {
+const message = generateQueueName({ feature: PAYMENT, action: PROCESSED });
+
+initRabbit.consume(message, async msgContent => {
   try {
     const event = JSON.parse(msgContent);
 

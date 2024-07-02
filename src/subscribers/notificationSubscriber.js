@@ -1,10 +1,16 @@
 const { initRabbit } = require('@/dbs');
 const {
   eventConstants: { NOTIFICATION_SENT },
+  messageQueueConstants: { NOTIFICATION },
 } = require('@/constants');
 const { Notification } = require('@/commands/models');
+const {
+  messageQueueHelpers: { generateQueueName },
+} = require('@/helpers');
 
-initRabbit.consume('NotificationQueue', async msgContent => {
+const message = generateQueueName({ feature: NOTIFICATION });
+
+initRabbit.consume(message, async msgContent => {
   const event = JSON.parse(msgContent);
   if (event.eventType === NOTIFICATION_SENT) {
     // Save the notification to the database

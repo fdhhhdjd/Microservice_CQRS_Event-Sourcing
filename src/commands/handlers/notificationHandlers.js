@@ -1,8 +1,12 @@
 const {
   eventConstants: { NOTIFICATION_SENT },
+  messageQueueConstants: { NOTIFICATION },
 } = require('@/constants');
 const { initRabbit } = require('@/dbs');
 const { saveEvent } = require('@/events/handlers');
+const {
+  messageQueueHelpers: { generateQueueName },
+} = require('@/helpers');
 
 const sendNotification = async (notificationId, notificationData) => {
   const event = await saveEvent(
@@ -10,7 +14,8 @@ const sendNotification = async (notificationId, notificationData) => {
     NOTIFICATION_SENT,
     notificationData,
   );
-  await initRabbit.publish('NotificationQueue', JSON.stringify(event));
+  const message = generateQueueName({ feature: NOTIFICATION });
+  await initRabbit.publish(message, JSON.stringify(event));
   return event;
 };
 

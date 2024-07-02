@@ -38,4 +38,25 @@ const getMorganFormat = () => {
   return isNodeEnvMatch() ? 'dev' : 'combined';
 };
 
-module.exports = { isNodeEnvMatch, getCorsOptions, getMorganFormat };
+/**
+ * Retrieves the current node app based on the environment.
+ * @returns {string} The current node app.
+ */
+const getNodeApp = () => {
+  const isDev = process.env.NODE_ENV === NODE_ENVS[0];
+  const isProduct = process.env.NODE_ENV === NODE_ENVS[1];
+  if (isDev) {
+    return NODE_ENVS[0];
+  } else if (isProduct) {
+    return NODE_ENVS[1];
+  } else {
+    return NODE_ENVS[2];
+  }
+};
+
+module.exports = {
+  isNodeEnvMatch,
+  getCorsOptions,
+  getMorganFormat,
+  getNodeApp,
+};

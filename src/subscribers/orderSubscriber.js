@@ -2,9 +2,15 @@ const { initRabbit } = require('@/dbs');
 const { handlePayment } = require('@/app/v1/services/paymentService');
 const {
   eventConstants: { ORDER_CREATED },
+  messageQueueConstants: { ORDER, CREATED },
 } = require('@/constants');
+const {
+  messageQueueHelpers: { generateQueueName },
+} = require('@/helpers');
 
-initRabbit.consume('OrderQueue', async msgContent => {
+const message = generateQueueName({ feature: ORDER, action: CREATED });
+
+initRabbit.consume(message, async msgContent => {
   if (!msgContent) {
     console.error('Message content is undefined or null');
     return;
