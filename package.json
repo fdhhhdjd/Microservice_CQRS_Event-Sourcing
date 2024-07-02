@@ -56,6 +56,8 @@
     "sanitize-filename": "^1.6.3",
     "sequelize": "^6.37.3",
     "uuid": "^10.0.0",
+    "winston": "^3.13.0",
+    "winston-daily-rotate-file": "^5.0.0",
     "xss": "^1.0.15"
   },
   "devDependencies": {

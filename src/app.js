@@ -5,27 +5,32 @@ const express = require('express');
 const { default: helmet } = require('helmet');
 const morgan = require('morgan');
 
-const { getCorsOptions, getMorganFormat } = require('@/helpers/appHelpers');
-const { notFoundHandler, errorHandler } = require('@/helpers/errorHandle');
+const {
+  errorHandleHelpers: { errorHandler, notFoundHandler },
+  appHelpers: { getCorsOptions, getMorganFormat },
+} = require('@/helpers');
 const pathTraversalMiddleware = require('@/middlewares/pathTraversalMiddleware');
+const loggerMiddleware = require('@/middlewares/loggerMiddleware');
 const requestSizeLimiterMiddleware = require('@/middlewares/requestSizeLimiterMiddleware');
 
-const app = express();
 require('dotenv').config();
+const app = express();
+
 app.enable();
 app.use(helmet());
-app.use(requestSizeLimiterMiddleware);
-app.use(cookieParser());
+app.use(compression());
 app.use(express.json());
 app.use(
   express.urlencoded({
     extended: true,
   }),
 );
+app.use(cookieParser());
 app.use(cors(getCorsOptions()));
+app.use(requestSizeLimiterMiddleware);
 app.use(pathTraversalMiddleware);
-app.use(compression());
 app.use(morgan(getMorganFormat()));
+app.use(loggerMiddleware);
 
 //* GLOBAL
 require('@/globals/globals');
