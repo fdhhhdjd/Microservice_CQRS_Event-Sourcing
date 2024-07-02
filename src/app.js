@@ -9,10 +9,12 @@ const {
   errorHandleHelpers: { errorHandler, notFoundHandler },
   appHelpers: { getCorsOptions, getMorganFormat },
 } = require('@/helpers');
-const pathTraversalMiddleware = require('@/middlewares/pathTraversalMiddleware');
-const loggerMiddleware = require('@/middlewares/loggerMiddleware');
-const requestSizeLimiterMiddleware = require('@/middlewares/requestSizeLimiterMiddleware');
-const monitoringMiddleware = require('@/middlewares/monitoringMiddleware');
+const {
+  pathTraversalMiddleware,
+  loggerMiddleware,
+  requestSizeLimiterMiddleware,
+  monitoringMiddleware,
+} = require('@/middlewares');
 const {
   appHelpers: { isNodeEnvMatch },
 } = require('@/helpers');

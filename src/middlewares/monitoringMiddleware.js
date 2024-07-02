@@ -1,7 +1,7 @@
 'use strict';
 
 const { v4: uuid } = require('uuid');
-const MyLogger = require('@/loggers/logger');
+const MyLogger = require('@/loggers');
 const {
   formatTimeHelpers: { formatElapsedTime },
 } = require('@/helpers');

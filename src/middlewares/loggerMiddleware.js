@@ -1,6 +1,6 @@
 const { v4: uuid } = require('uuid');
 
-const MyLogger = require('@/loggers/logger');
+const MyLogger = require('@/loggers');
 
 const loggerMiddleware = (req, __, next) => {
   req.requestStartTime = Date.now();

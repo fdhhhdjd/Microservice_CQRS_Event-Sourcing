@@ -2,7 +2,7 @@
 
 const { NotFoundError } = require('@/cors');
 const { StatusCodes, ErrorCodes, ReasonPhrases } = require('@/utils');
-const MyLogger = require('@/loggers/logger');
+const MyLogger = require('@/loggers');
 const {
   appConstants: { NODE_ENVS },
 } = require('@/constants');
