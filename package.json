@@ -6,7 +6,7 @@
   "repository": "github.com/fdhhhdjd/CQRS-Event_Sourcing",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js",
+    "dev": "DEBUG=ioredis:* node --watch server.js",
     "format": "prettier --write src/**/*.{js,jsx}",
     "prepare": "husky install",
     "pre-commit": "echo \"[Husky] pre-commit\"",
