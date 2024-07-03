@@ -1,11 +1,11 @@
-const { createOrder } = require('./orderHandlers');
-const { reserveProduct } = require('./productHandlers');
-const { processPayment } = require('./paymentHandlers');
-const { sendNotification } = require('./notificationHandlers');
+const OrderHandlers = require('./orderHandlers');
+const ProductHandlers = require('./productHandlers');
+const PaymentHandlers = require('./paymentHandlers');
+const NotificationHandlers = require('./notificationHandlers');
 
 module.exports = {
-  createOrder,
-  processPayment,
-  reserveProduct,
-  sendNotification,
+  OrderHandlers,
+  PaymentHandlers,
+  ProductHandlers,
+  NotificationHandlers,
 };

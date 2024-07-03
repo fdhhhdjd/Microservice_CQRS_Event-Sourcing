@@ -8,13 +8,13 @@ const {
   messageQueueHelpers: { generateQueueName },
 } = require('@/helpers');
 
-const sendNotification = async (notificationId, notificationData) => {
-  const event = await saveEvent(notificationId, NOTIFICATION_SENT, notificationData);
-  const message = generateQueueName({ feature: NOTIFICATION });
-  await initRabbit.publish(message, JSON.stringify(event));
-  return event;
-};
+class NotificationHandlers {
+  static async sendNotification(notificationId, notificationData) {
+    const event = await saveEvent(notificationId, NOTIFICATION_SENT, notificationData);
+    const message = generateQueueName({ feature: NOTIFICATION });
+    await initRabbit.publish(message, JSON.stringify(event));
+    return event;
+  }
+}
 
-module.exports = {
-  sendNotification,
-};
+module.exports = NotificationHandlers;

@@ -1,19 +1,18 @@
 const { v4: uuidv4 } = require('uuid');
 
-const { reserveProduct } = require('@/commands/handlers');
-const { Product } = require('@/commands/models');
+const { ProductHandlers } = require('@/commands/handlers');
 const { BadRequestRequestError } = require('@/cors');
-const { ErrorCodes } = require('@/utils');
 
 const handleProductReservation = async (productId, productData) => {
-  return await reserveProduct(productId, productData);
+  return await ProductHandlers.reserveProduct(productId, productData);
 };
 
 const createProduct = async data => {
   if (!data.name || !data.stock) {
     throw new BadRequestRequestError();
   }
-  return Product.create({
+
+  return await ProductHandlers.newProduct({
     id: uuidv4(),
     name: data.name,
     stock: data.stock,

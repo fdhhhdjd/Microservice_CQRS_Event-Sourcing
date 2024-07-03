@@ -9,16 +9,21 @@ const {
   messageQueueHelpers: { generateQueueName },
 } = require('@/helpers');
 
-const processPayment = async (paymentId, paymentData) => {
-  const message = generateQueueName({ feature: PAYMENT, action: PROCESSED });
+class PaymentHandlers {
+  static async processPayment(paymentId, paymentData) {
+    const message = generateQueueName({ feature: PAYMENT, action: PROCESSED });
 
-  const event = await saveEvent(paymentId, PAYMENT_PROCESSED, paymentData);
-  await Payment.create({ id: paymentId, ...paymentData });
+    const newPayment = await Payment.create({ id: paymentId, ...paymentData });
+    const paymentValues = newPayment?.dataValues;
 
-  await initRabbit.publish(message, JSON.stringify(event));
-  return event;
-};
+    const event = await saveEvent(paymentId, PAYMENT_PROCESSED, {
+      paymentId: paymentValues.id,
+      ...paymentData,
+    });
 
-module.exports = {
-  processPayment,
-};
+    await initRabbit.publish(message, JSON.stringify(event));
+    return event;
+  }
+}
+
+module.exports = PaymentHandlers;

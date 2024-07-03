@@ -1,6 +1,6 @@
 const {
-  eventConstants: { PRODUCT_RESERVED },
-  messageQueueConstants: { PRODUCT, RESERVED },
+  eventConstants: { PRODUCT_RESERVED, PRODUCT_CREATED },
+  messageQueueConstants: { PRODUCT, RESERVED, CREATED },
 } = require('@/constants');
 const { initRabbit } = require('@/inits');
 const { Product } = require('@/commands/models');
@@ -9,23 +9,32 @@ const {
   messageQueueHelpers: { generateQueueName },
 } = require('@/helpers');
 
-const reserveProduct = async (productId, productData) => {
-  const message = generateQueueName({ feature: PRODUCT, action: RESERVED });
+class ProductHandlers {
+  static async reserveProduct(productId, productData) {
+    const message = generateQueueName({ feature: PRODUCT, action: RESERVED });
 
-  const product = await Product.findOne({
-    where: { id: productData.productId },
-  });
-  if (product) {
-    product.stock -= 1;
-    await product.save();
-    const event = await saveEvent(productId, PRODUCT_RESERVED, productData);
-    await initRabbit.publish(message, JSON.stringify(event));
-    return event;
-  } else {
-    throw new Error('Product not found');
+    const product = await Product.findOne({
+      where: { id: productData.productId },
+    });
+    if (product) {
+      product.stock -= 1;
+      await product.save();
+      const event = await saveEvent(productId, PRODUCT_RESERVED, productData);
+      await initRabbit.publish(message, JSON.stringify(event));
+      return event;
+    } else {
+      throw new Error('Product not found');
+    }
   }
-};
 
-module.exports = {
-  reserveProduct,
-};
+  static async newProduct(newDataProduct) {
+    const message = generateQueueName({ feature: PRODUCT, action: CREATED });
+
+    const product = await Product.create(newDataProduct);
+    const event = await saveEvent(newDataProduct.id, PRODUCT_CREATED, newDataProduct);
+    await initRabbit.publish(message, JSON.stringify(event));
+    return product;
+  }
+}
+
+module.exports = ProductHandlers;

@@ -1,5 +1,4 @@
 const { v4: uuidv4 } = require('uuid');
-
 const {
   eventConstants: { ORDER_CREATED },
   messageQueueConstants: { ORDER, CREATED },
@@ -10,25 +9,34 @@ const { saveEvent } = require('@/events/handlers');
 const {
   messageQueueHelpers: { generateQueueName },
 } = require('@/helpers');
+const { BadRequestRequestError } = require('@/cors');
 
-const createOrder = async orderData => {
-  const aggregateId = uuidv4();
-  const message = generateQueueName({ feature: ORDER, action: CREATED });
+class OrderHandlers {
+  static async createOrder(orderData) {
+    const aggregateId = uuidv4();
+    const message = generateQueueName({ feature: ORDER, action: CREATED });
 
-  const eventData = {
-    orderId: uuidv4(),
-    amount: orderData.amount,
-    productId: orderData.productId,
-  };
+    const eventData = {
+      amount: orderData.amount,
+      productId: orderData.productId,
+    };
 
-  const event = await saveEvent(aggregateId, ORDER_CREATED, eventData);
+    const newOrder = await Order.create(eventData);
+    const orderValues = newOrder?.dataValues;
 
-  await Order.create({ id: uuidv4(), ...eventData });
+    if (!orderValues) {
+      throw new BadRequestRequestError();
+    }
 
-  await initRabbit.publish(message, JSON.stringify(event));
-  return event;
-};
+    const event = await saveEvent(aggregateId, ORDER_CREATED, {
+      orderId: orderValues?.id,
+      amount: orderData.amount,
+      productId: orderData.productId,
+    });
 
-module.exports = {
-  createOrder,
-};
+    await initRabbit.publish(message, JSON.stringify(event));
+    return event;
+  }
+}
+
+module.exports = OrderHandlers;

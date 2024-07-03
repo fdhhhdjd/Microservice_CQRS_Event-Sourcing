@@ -1,5 +1,5 @@
 const Order = require('./orderModel');
-const Payment = require('./PaymentModel');
+const Payment = require('./paymentModel');
 const Product = require('./productModel');
 const Notification = require('./notificationModel');
 
