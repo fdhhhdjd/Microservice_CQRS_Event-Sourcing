@@ -48,7 +48,7 @@ This project implements a Command Query Responsibility Segregation (CQRS) and Ev
     ├── configs/
     ├── constants/
     ├── cors/
-    ├── dbs/
+    ├── inits/
     ├── events/
     │   ├── models/
     │   └── subscribers/
@@ -98,7 +98,7 @@ This README.md file outlines the directory structure of a software project that 
     - `configs/`: Các tệp cấu hình cho cơ sở dữ liệu và các dịch vụ khác.
     - `constants/`: Hằng số được sử dụng trong toàn bộ ứng dụng.
     - `cors/`: Cấu hình cho Cross-Origin Resource Sharing.
-    - `dbs/`: Kịch bản khởi tạo cơ sở dữ liệu.
+    - `inits/`: Kịch bản khởi tạo cơ sở dữ liệu.
     - `events/`: Chứa các mô hình sự kiện và người đăng ký, trung tâm của Event Sourcing.
       - `models/`: Mô hình đại diện cho các sự kiện trong hệ thống.
       - `subscribers/`: Các trình xử lý phản ứng với sự kiện.
@@ -145,7 +145,7 @@ This README.md file outlines the directory structure of a software project that 
     - `configs/`: Configuration files for databases and other services.
     - `constants/`: Constants used throughout the application.
     - `cors/`: Configuration for Cross-Origin Resource Sharing.
-    - `dbs/`: Database initialization scripts.
+    - `inits/`: All Database, Cache, socket,... initialization scripts.
     - `events/`: Contains event models and subscribers, central to Event Sourcing.
       - `models/`: Models representing events in the system.
       - `subscribers/`: Handlers reacting to events.
