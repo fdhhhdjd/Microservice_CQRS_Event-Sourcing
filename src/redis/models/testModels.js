@@ -1,4 +1,4 @@
-const { initIoRedis } = require('@/dbs');
+const { initIoRedis } = require('@/inits');
 const {
   timeConstants: { _1_DAY },
 } = require('@/constants');

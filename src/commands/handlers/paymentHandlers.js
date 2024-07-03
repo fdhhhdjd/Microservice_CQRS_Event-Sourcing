@@ -2,7 +2,7 @@ const {
   eventConstants: { PAYMENT_PROCESSED },
   messageQueueConstants: { PAYMENT, PROCESSED },
 } = require('@/constants');
-const { initRabbit } = require('@/dbs');
+const { initRabbit } = require('@/inits');
 const { Payment } = require('@/commands/models');
 const { saveEvent } = require('@/events/handlers');
 const {

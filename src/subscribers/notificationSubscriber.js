@@ -1,4 +1,4 @@
-const { initRabbit } = require('@/dbs');
+const { initRabbit } = require('@/inits');
 const {
   eventConstants: { NOTIFICATION_SENT },
   messageQueueConstants: { NOTIFICATION },

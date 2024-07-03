@@ -1,4 +1,4 @@
-const { initRabbit } = require('@/dbs');
+const { initRabbit } = require('@/inits');
 const { handleNotification } = require('@/app/v1/services/notificationService');
 const {
   eventConstants: { PRODUCT_RESERVED },

@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 
-const SequelizePGConnection = require('@/dbs/init.sequelizePG');
+const SequelizePGConnection = require('@/inits/init.sequelizePG');
 
 const Order = SequelizePGConnection.sequelize.define(
   'Order',

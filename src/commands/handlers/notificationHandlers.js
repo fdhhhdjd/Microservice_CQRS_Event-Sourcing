@@ -2,7 +2,7 @@ const {
   eventConstants: { NOTIFICATION_SENT },
   messageQueueConstants: { NOTIFICATION },
 } = require('@/constants');
-const { initRabbit } = require('@/dbs');
+const { initRabbit } = require('@/inits');
 const { saveEvent } = require('@/events/handlers');
 const {
   messageQueueHelpers: { generateQueueName },

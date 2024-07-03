@@ -1,4 +1,4 @@
-const { initSequelizePG, initMongo, initRabbit, initIoRedis } = require('@/dbs');
+const { initSequelizePG, initMongo, initRabbit, initIoRedis } = require('@/inits');
 
 (async () => {
   //* MongoDB

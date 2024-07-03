@@ -2,7 +2,7 @@ const {
   eventConstants: { PRODUCT_RESERVED },
   messageQueueConstants: { PRODUCT, RESERVED },
 } = require('@/constants');
-const { initRabbit } = require('@/dbs');
+const { initRabbit } = require('@/inits');
 const { Product } = require('@/commands/models');
 const { saveEvent } = require('@/events/handlers');
 const {

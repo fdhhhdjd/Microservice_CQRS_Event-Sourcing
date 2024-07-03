@@ -3,7 +3,7 @@ require('module-alias/register');
 const http = require('http');
 
 const app = require('@/app');
-const { initSocket } = require('@/dbs');
+const { initSocket } = require('@/inits');
 const {
   appConfigs: {
     app: { port },

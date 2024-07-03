@@ -1,4 +1,4 @@
-const { initRabbit } = require('@/dbs');
+const { initRabbit } = require('@/inits');
 const { handlePayment } = require('@/app/v1/services/paymentService');
 const {
   eventConstants: { ORDER_CREATED },

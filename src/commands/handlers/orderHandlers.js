@@ -4,7 +4,7 @@ const {
   eventConstants: { ORDER_CREATED },
   messageQueueConstants: { ORDER, CREATED },
 } = require('@/constants');
-const { initRabbit } = require('@/dbs');
+const { initRabbit } = require('@/inits');
 const { Order } = require('@/commands/models');
 const { saveEvent } = require('@/events/handlers');
 const {
