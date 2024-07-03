@@ -3,8 +3,7 @@ require('module-alias/register');
 const http = require('http');
 
 const app = require('@/app');
-const SocketConnection = require('@/dbs/init.socket');
-
+const { initSocket } = require('@/dbs');
 const {
   appConfigs: {
     app: { port },
@@ -15,8 +14,11 @@ const PORT = port || 5000;
 
 const server = http.createServer(app);
 
-new SocketConnection(server);
+//* Connect Socket IO
+const globalIo = new initSocket(server);
+globalIo.initialize();
+global.io = globalIo;
 
 server.listen(PORT, () => {
-  console.info(`Api backend start with http://localhost:${PORT}`);
+  console.info(`🚀 Server is listening on port http://localhost:${PORT}`);
 });

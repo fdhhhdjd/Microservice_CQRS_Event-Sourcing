@@ -4,6 +4,7 @@ const express = require('express');
 
 const { ReasonPhrases, StatusCodes } = require('@/utils');
 const { TestModels } = require('@/redis/models');
+const SocketConnection = require('@/dbs/init.socket');
 
 const router = express.Router();
 
@@ -14,6 +15,10 @@ router.get('/', async (_, res, __) => {
   if (test === null) {
     await myTestModel.setTest('3105', { fullname: 'Nguyen Tien Tai 🥰' });
   }
+  global.io.sendData({
+    eventName: 'client_connected',
+    data: { message: 'Welcome To Tai Dev 👌!' },
+  });
 
   const healthCheck = {
     uptime: process.uptime(),
@@ -21,6 +26,7 @@ router.get('/', async (_, res, __) => {
     timestamp: Date.now(),
     author: test ? test?.fullname : '🤔',
   };
+
   return res.status(StatusCodes.OK).json(healthCheck);
 });
 
