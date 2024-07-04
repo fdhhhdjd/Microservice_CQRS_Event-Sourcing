@@ -7,7 +7,7 @@ const { Notification } = require('@/commands/models');
 const {
   messageQueueHelpers: { generateQueueName },
 } = require('@/helpers');
-const { NotificationModel } = require('@/app/v1/models');
+const { NotificationModel } = require('@/queries/models');
 
 class NotificationSentConsumer {
   constructor() {

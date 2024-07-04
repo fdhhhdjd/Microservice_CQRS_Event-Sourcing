@@ -7,7 +7,7 @@ const {
 const {
   messageQueueHelpers: { generateQueueName },
 } = require('@/helpers');
-const { OrderModel } = require('@/app/v1/models');
+const { OrderModel } = require('@/queries/models');
 
 class OrderCreatedConsumer {
   constructor() {

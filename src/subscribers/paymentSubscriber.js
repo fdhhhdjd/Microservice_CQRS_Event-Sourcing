@@ -7,7 +7,7 @@ const {
 const {
   messageQueueHelpers: { generateQueueName },
 } = require('@/helpers');
-const { PaymentModel } = require('@/app/v1/models');
+const { PaymentModel } = require('@/queries/models');
 
 class PaymentProcessedConsumer {
   constructor() {

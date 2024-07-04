@@ -7,7 +7,7 @@ const {
 const {
   messageQueueHelpers: { generateQueueName },
 } = require('@/helpers');
-const { ProductModel } = require('@/app/v1/models');
+const { ProductModel } = require('@/queries/models');
 
 class ProductSubscriber {
   constructor() {

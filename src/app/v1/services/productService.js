@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const { ProductHandlers } = require('@/commands/handlers');
 const { BadRequestRequestError } = require('@/cors');
 
-const { ProductRepo } = require('../models/repositories');
+const { ProductRepo } = require('../../../queries/models/repositories');
 
 class ProductService {
   static async getAllProducts() {

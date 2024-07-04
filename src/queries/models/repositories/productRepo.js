@@ -1,4 +1,4 @@
-const { ProductModel } = require('@/app/v1/models');
+const { ProductModel } = require('@/queries/models');
 
 class ProductRepository {
   static async getAllProducts() {
