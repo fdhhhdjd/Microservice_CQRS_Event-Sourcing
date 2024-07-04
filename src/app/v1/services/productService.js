@@ -3,7 +3,17 @@ const { v4: uuidv4 } = require('uuid');
 const { ProductHandlers } = require('@/commands/handlers');
 const { BadRequestRequestError } = require('@/cors');
 
+const { ProductRepo } = require('../models/repositories');
+
 class ProductService {
+  static async getAllProducts() {
+    return await ProductRepo.getAllProducts();
+  }
+
+  static async getProductDetails(productId) {
+    return await ProductRepo.getProductDetails(productId);
+  }
+
   static async handleProductReservation(productId, productData) {
     return await ProductHandlers.reserveProduct(productId, productData);
   }

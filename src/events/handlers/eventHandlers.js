@@ -16,6 +16,7 @@ class EventHandler {
 
   static async getEvents(aggregateId) {
     return await Event.find({ aggregateId })
+      .lean()
       .sort({ timestamp: 1 })
       .exec();
   }

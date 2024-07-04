@@ -37,6 +37,14 @@ class ProductSubscriber {
     try {
       const event = JSON.parse(msgContent);
       if (event.eventType === PRODUCT_RESERVED) {
+        await ProductModel.updateOne(
+          {
+            _id: event.eventData.productId,
+          },
+          {
+            $inc: { stock: -1 },
+          },
+        );
         await NotificationService.handleNotification(event.aggregateId, {
           message: 'Product reserved successfully',
         });

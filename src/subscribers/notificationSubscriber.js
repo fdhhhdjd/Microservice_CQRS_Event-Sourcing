@@ -1,12 +1,13 @@
 const { initRabbit } = require('@/inits');
 const {
   eventConstants: { NOTIFICATION_SENT },
-  messageQueueConstants: { NOTIFICATION },
+  messageQueueConstants: { NOTIFICATION, SEND },
 } = require('@/constants');
 const { Notification } = require('@/commands/models');
 const {
   messageQueueHelpers: { generateQueueName },
 } = require('@/helpers');
+const { NotificationModel } = require('@/app/v1/models');
 
 class NotificationSentConsumer {
   constructor() {
@@ -14,7 +15,7 @@ class NotificationSentConsumer {
   }
 
   init() {
-    const message = generateQueueName({ feature: NOTIFICATION });
+    const message = generateQueueName({ feature: NOTIFICATION, action: SEND });
     initRabbit.consume(message, async msgContent => {
       await this.handleNotificationSent(msgContent);
     });
@@ -24,10 +25,9 @@ class NotificationSentConsumer {
     try {
       const event = JSON.parse(msgContent);
       if (event.eventType === NOTIFICATION_SENT) {
-        const notification = new Notification({
-          id: event.eventId,
+        const notification = new NotificationModel({
+          _id: event.eventData.id,
           message: event.eventData.message,
-          status: 'SENT',
         });
 
         await notification.save();

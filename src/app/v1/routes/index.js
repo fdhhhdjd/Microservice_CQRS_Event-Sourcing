@@ -32,5 +32,6 @@ router.get('/', async (_, res, __) => {
 
 router.use('/products', require('./products'));
 router.use('/orders', require('./orders'));
+router.use('/events', require('./events'));
 
 module.exports = router;

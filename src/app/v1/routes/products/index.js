@@ -8,4 +8,8 @@ const asyncHandler = require('@/helpers/asyncHandlerHelpers');
 
 router.post('/create', asyncHandler(ProductControllers.createProduct));
 
+router.get('/all', asyncHandler(ProductControllers.getAllProducts));
+
+router.get('/:productId', asyncHandler(ProductControllers.getProductDetails));
+
 module.exports = router;
