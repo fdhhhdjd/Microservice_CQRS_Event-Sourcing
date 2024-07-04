@@ -1,7 +1,9 @@
 const { NotificationHandlers } = require('@/commands/handlers');
 
-const handleNotification = async (notificationId, notificationData) => {
-  return await NotificationHandlers.sendNotification(notificationId, notificationData);
-};
+class NotificationService {
+  static async handleNotification(notificationId, notificationData) {
+    return await NotificationHandlers.sendNotification(notificationId, notificationData);
+  }
+}
 
-module.exports = { handleNotification };
+module.exports = NotificationService;

@@ -5,7 +5,7 @@ const {
 } = require('@/constants');
 const { initRabbit } = require('@/inits');
 const { Order } = require('@/commands/models');
-const { saveEvent } = require('@/events/handlers');
+const { EventHandler } = require('@/events/handlers');
 const {
   messageQueueHelpers: { generateQueueName },
 } = require('@/helpers');
@@ -28,7 +28,7 @@ class OrderHandlers {
       throw new BadRequestRequestError();
     }
 
-    const event = await saveEvent(aggregateId, ORDER_CREATED, {
+    const event = await EventHandler.saveEvent(aggregateId, ORDER_CREATED, {
       orderId: orderValues?.id,
       amount: orderData.amount,
       productId: orderData.productId,

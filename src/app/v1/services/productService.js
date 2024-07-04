@@ -3,20 +3,22 @@ const { v4: uuidv4 } = require('uuid');
 const { ProductHandlers } = require('@/commands/handlers');
 const { BadRequestRequestError } = require('@/cors');
 
-const handleProductReservation = async (productId, productData) => {
-  return await ProductHandlers.reserveProduct(productId, productData);
-};
-
-const createProduct = async data => {
-  if (!data.name || !data.stock) {
-    throw new BadRequestRequestError();
+class ProductService {
+  static async handleProductReservation(productId, productData) {
+    return await ProductHandlers.reserveProduct(productId, productData);
   }
 
-  return await ProductHandlers.newProduct({
-    id: uuidv4(),
-    name: data.name,
-    stock: data.stock,
-  });
-};
+  static async createProduct(data) {
+    if (!data.name || !data.stock) {
+      throw new BadRequestRequestError();
+    }
 
-module.exports = { handleProductReservation, createProduct };
+    return await ProductHandlers.newProduct({
+      id: uuidv4(),
+      name: data.name,
+      stock: data.stock,
+    });
+  }
+}
+
+module.exports = ProductService;

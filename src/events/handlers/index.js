@@ -1,3 +1,3 @@
-const { saveEvent, getEvents } = require('./eventHandlers');
+const EventHandler = require('./eventHandlers');
 
-module.exports = { saveEvent, getEvents };
+module.exports = { EventHandler };

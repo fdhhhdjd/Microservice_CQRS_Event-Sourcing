@@ -4,7 +4,7 @@ const {
 } = require('@/constants');
 const { initRabbit } = require('@/inits');
 const { Payment } = require('@/commands/models');
-const { saveEvent } = require('@/events/handlers');
+const { EventHandler } = require('@/events/handlers');
 const {
   messageQueueHelpers: { generateQueueName },
 } = require('@/helpers');
@@ -16,7 +16,7 @@ class PaymentHandlers {
     const newPayment = await Payment.create({ id: paymentId, ...paymentData });
     const paymentValues = newPayment?.dataValues;
 
-    const event = await saveEvent(paymentId, PAYMENT_PROCESSED, {
+    const event = await EventHandler.saveEvent(paymentId, PAYMENT_PROCESSED, {
       paymentId: paymentValues.id,
       ...paymentData,
     });

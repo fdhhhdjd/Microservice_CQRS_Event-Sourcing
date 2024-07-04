@@ -1,5 +1,5 @@
 const { initRabbit } = require('@/inits');
-const { handlePayment } = require('@/app/v1/services/paymentService');
+const PaymentService = require('@/app/v1/services/paymentService');
 const {
   eventConstants: { ORDER_CREATED },
   messageQueueConstants: { ORDER, CREATED },
@@ -36,7 +36,7 @@ class OrderCreatedConsumer {
         });
 
         await order.save();
-        await handlePayment(event.aggregateId, {
+        await PaymentService.handlePayment(event.aggregateId, {
           amount: event.eventData.amount,
           orderId: event.eventData.orderId,
           productId: event.eventData.productId,

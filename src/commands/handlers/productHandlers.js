@@ -4,7 +4,7 @@ const {
 } = require('@/constants');
 const { initRabbit } = require('@/inits');
 const { Product } = require('@/commands/models');
-const { saveEvent } = require('@/events/handlers');
+const { EventHandler } = require('@/events/handlers');
 const {
   messageQueueHelpers: { generateQueueName },
 } = require('@/helpers');
@@ -19,7 +19,7 @@ class ProductHandlers {
     if (product) {
       product.stock -= 1;
       await product.save();
-      const event = await saveEvent(productId, PRODUCT_RESERVED, productData);
+      const event = await EventHandler.saveEvent(productId, PRODUCT_RESERVED, productData);
       await initRabbit.publish(message, JSON.stringify(event));
       return event;
     } else {
@@ -31,7 +31,7 @@ class ProductHandlers {
     const message = generateQueueName({ feature: PRODUCT, action: CREATED });
 
     const product = await Product.create(newDataProduct);
-    const event = await saveEvent(newDataProduct.id, PRODUCT_CREATED, newDataProduct);
+    const event = await EventHandler.saveEvent(newDataProduct.id, PRODUCT_CREATED, newDataProduct);
     await initRabbit.publish(message, JSON.stringify(event));
     return product;
   }

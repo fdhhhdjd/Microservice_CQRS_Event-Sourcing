@@ -1,5 +1,5 @@
 const { initRabbit } = require('@/inits');
-const { handleNotification } = require('@/app/v1/services/notificationService');
+const NotificationService = require('@/app/v1/services/notificationService');
 const {
   eventConstants: { PRODUCT_RESERVED, PRODUCT_CREATED },
   messageQueueConstants: { PRODUCT, RESERVED, CREATED },
@@ -37,7 +37,7 @@ class ProductSubscriber {
     try {
       const event = JSON.parse(msgContent);
       if (event.eventType === PRODUCT_RESERVED) {
-        await handleNotification(event.aggregateId, {
+        await NotificationService.handleNotification(event.aggregateId, {
           message: 'Product reserved successfully',
         });
       }

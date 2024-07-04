@@ -1,7 +1,9 @@
 const { PaymentHandlers } = require('@/commands/handlers');
 
-const handlePayment = async (paymentId, paymentData) => {
-  return await PaymentHandlers.processPayment(paymentId, paymentData);
-};
+class PaymentService {
+  static async handlePayment(paymentId, paymentData) {
+    return await PaymentHandlers.processPayment(paymentId, paymentData);
+  }
+}
 
-module.exports = { handlePayment };
+module.exports = PaymentService;
