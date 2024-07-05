@@ -1,9 +1,16 @@
 'use strict';
 
+require('dotenv').config();
 const path = require('path');
 const { v4: uuid } = require('uuid');
 const { format, createLogger, transports } = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
+
+const {
+  appConstants: { NODE_ENVS },
+} = require('@/constants');
+
+const isProduction = process.env.NODE_ENV === NODE_ENVS[1];
 
 const logsDirectory = path.join(__dirname, '../logs');
 
@@ -31,17 +38,25 @@ const createTransport = level => {
 
 class MyLogger {
   constructor() {
-    this.logger = createLogger({
-      transports: [
-        new transports.Console({
-          format: format.combine(format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), logFormat),
-          level: 'info',
-        }),
-        createTransport('info'),
-        createTransport('error'),
-        createTransport('warn'),
-      ],
-    });
+    if (isProduction) {
+      this.logger = createLogger({
+        transports: [
+          new transports.Console({
+            format: format.combine(format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), logFormat),
+            level: 'info',
+          }),
+          createTransport('info'),
+          createTransport('error'),
+          createTransport('warn'),
+        ],
+      });
+    } else {
+      this.logger = {
+        info: () => {},
+        error: () => {},
+        warn: () => {},
+      };
+    }
   }
 
   commonParams(params) {
@@ -51,15 +66,21 @@ class MyLogger {
   }
 
   log(message, params) {
-    this.logger.info({ message, ...this.commonParams(params) });
+    if (this.logger.info) {
+      this.logger.info({ message, ...this.commonParams(params) });
+    }
   }
 
   error(message, params) {
-    this.logger.error({ message, ...this.commonParams(params) });
+    if (this.logger.error) {
+      this.logger.error({ message, ...this.commonParams(params) });
+    }
   }
 
   warn(message, params) {
-    this.logger.warn({ message, ...this.commonParams(params) });
+    if (this.logger.warn) {
+      this.logger.warn({ message, ...this.commonParams(params) });
+    }
   }
 }
 
