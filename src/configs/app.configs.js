@@ -8,14 +8,14 @@ const {
 
 const DEV = {
   app: {
-    port: process.env.PORT,
+    port: process.env.PORT || 5000,
     node: process.env.NODE_ENV,
   },
 };
 
 const PRO = {
   app: {
-    port: process.env.PORT,
+    port: process.env.PORT || 5000,
     node: process.env.NODE_ENV,
   },
 };

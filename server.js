@@ -12,8 +12,6 @@ const {
   },
 } = require('@/configs');
 
-const PORT = port || 5000;
-
 const server = http.createServer(app);
 
 //* Connect Socket IO
@@ -21,6 +19,6 @@ const globalIo = new initSocket(server);
 globalIo.initialize();
 global.io = globalIo;
 
-server.listen(PORT, () => {
-  console.info(`🚀 Server is listening on port http://localhost:${PORT}`);
+server.listen(port, () => {
+  console.info(`🚀 Server is listening on port http://localhost:${port}`);
 });
