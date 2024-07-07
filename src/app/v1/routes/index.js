@@ -4,7 +4,6 @@ const express = require('express');
 
 const { ReasonPhrases, StatusCodes } = require('@/utils');
 const { TestModels } = require('@/redis/models');
-const SocketConnection = require('@/inits/init.socket');
 
 const router = express.Router();
 

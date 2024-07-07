@@ -1,3 +1,5 @@
+'use strict';
+
 const errorCodes = require('@/utils/errorCodes');
 const reasonPhrases = require('@/utils/reasonPhrases');
 const statusCodes = require('@/utils/statusCodes');

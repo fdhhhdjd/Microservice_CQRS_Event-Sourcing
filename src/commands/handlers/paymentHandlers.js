@@ -1,3 +1,5 @@
+'use strict';
+
 const {
   eventConstants: { PAYMENT_PROCESSED },
   messageQueueConstants: { PAYMENT, PROCESSED },

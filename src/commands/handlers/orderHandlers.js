@@ -1,4 +1,7 @@
+'use strict';
+
 const { v4: uuidv4 } = require('uuid');
+
 const {
   eventConstants: { ORDER_CREATED },
   messageQueueConstants: { ORDER, CREATED },

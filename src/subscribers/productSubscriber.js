@@ -1,3 +1,5 @@
+'use strict';
+
 const { initRabbit } = require('@/inits');
 const NotificationService = require('@/app/v1/services/notificationService');
 const {

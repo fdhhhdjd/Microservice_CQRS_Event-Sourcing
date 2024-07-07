@@ -1,4 +1,7 @@
+'use strict';
+
 const { Server } = require('socket.io');
+
 const {
   timeConstants: { _5_SECOND, _10_SECOND, _25_SECOND },
 } = require('@/constants');

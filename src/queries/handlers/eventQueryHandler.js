@@ -1,3 +1,5 @@
+'use strict';
+
 const { EventHandler } = require('@/events/handlers');
 
 class EventQueryHandler {

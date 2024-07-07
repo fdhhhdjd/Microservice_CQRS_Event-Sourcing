@@ -1,3 +1,5 @@
+'use strict';
+
 const { initSequelizePG, initMongo, initRabbit, initIoRedis } = require('@/inits');
 
 class ApplicationInitializer {

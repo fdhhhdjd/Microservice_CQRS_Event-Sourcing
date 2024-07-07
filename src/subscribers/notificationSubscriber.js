@@ -1,3 +1,5 @@
+'use strict';
+
 const { initRabbit } = require('@/inits');
 const {
   eventConstants: { NOTIFICATION_SENT },

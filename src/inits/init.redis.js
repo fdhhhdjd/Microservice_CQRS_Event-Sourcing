@@ -1,3 +1,5 @@
+'use strict';
+
 const IOREDIS = require('ioredis');
 
 const {

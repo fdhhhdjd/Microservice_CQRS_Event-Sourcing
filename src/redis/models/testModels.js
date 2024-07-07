@@ -1,3 +1,5 @@
+'use strict';
+
 const { initIoRedis } = require('@/inits');
 const {
   timeConstants: { _1_DAY },

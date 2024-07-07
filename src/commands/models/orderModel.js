@@ -1,3 +1,5 @@
+'use strict';
+
 const { DataTypes } = require('sequelize');
 
 const SequelizePGConnection = require('@/inits/init.sequelizePG');

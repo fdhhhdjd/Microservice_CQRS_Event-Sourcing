@@ -1,3 +1,5 @@
+'use strict';
+
 const { initRabbit } = require('@/inits');
 const PaymentService = require('@/app/v1/services/paymentService');
 const {

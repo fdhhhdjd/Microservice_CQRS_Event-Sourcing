@@ -1,3 +1,5 @@
+'use strict';
+
 const {
   eventConstants: { NOTIFICATION_SENT },
   messageQueueConstants: { NOTIFICATION, SEND },

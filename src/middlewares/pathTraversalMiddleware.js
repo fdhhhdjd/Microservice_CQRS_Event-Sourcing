@@ -1,3 +1,5 @@
+'use strict';
+
 const xss = require('xss');
 
 const { BadRequestRequestError } = require('@/cors');

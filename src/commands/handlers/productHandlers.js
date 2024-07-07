@@ -1,3 +1,5 @@
+'use strict';
+
 const {
   eventConstants: { PRODUCT_RESERVED, PRODUCT_CREATED },
   messageQueueConstants: { PRODUCT, RESERVED, CREATED },

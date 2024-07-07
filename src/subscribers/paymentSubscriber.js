@@ -1,3 +1,5 @@
+'use strict';
+
 const { initRabbit } = require('@/inits');
 const { handleProductReservation } = require('@/app/v1/services/productService');
 const {
